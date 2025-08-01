@@ -1,0 +1,5 @@
+2025-08-01 16:46:01 [com.zuora.aitest.payment.PaymentApplication.main()] INFO  c.z.a.payment.PaymentApplication - Starting Payment Integration Application
+2025-08-01 16:46:01 [com.zuora.aitest.payment.PaymentApplication.main()] INFO  c.z.a.payment.PaymentApplication - Processing sample payment: PaymentRequest{amount=99.99, currency='USD', customerEmail='customer@example.com', paymentMethod='CREDIT_CARD', description='Sample payment transaction'}
+2025-08-01 16:46:01 [com.zuora.aitest.payment.PaymentApplication.main()] INFO  c.z.aitest.payment.PaymentService - Processing payment for amount: 99.99
+2025-08-01 16:46:01 [com.zuora.aitest.payment.PaymentApplication.main()] INFO  c.z.aitest.payment.PaymentService - Payment processed successfully with transaction ID: TXN_1754037961177
+2025-08-01 16:46:01 [com.zuora.aitest.payment.PaymentApplication.main()] INFO  c.z.a.payment.PaymentApplication - Payment result: PaymentResponse{transactionId='TXN_1754037961177', status='SUCCESS', message='Payment processed successfully', timestamp='2025-08-01T08:46:01.177681Z'}
