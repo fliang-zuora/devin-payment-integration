@@ -223,8 +223,8 @@
   ],
   "operations": [
     {
-      "operation_name": "Authorization",
-      "operation_type": "Authorization",
+      "payment_method_type": "CreditCard",
+      "operation_type": "Payment",
       "transactions": [
         {
           "transaction_name": "ProcessPayment",
