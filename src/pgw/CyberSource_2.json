@@ -309,6 +309,7 @@
               #{set}( $transactionStatus = $paymentResponseDoc.valueOf('/JsonRoot/status') )
               #{set}( $processorTransactionId = $paymentResponseDoc.valueOf('/JsonRoot/processorInformation/transactionId') )
               #{set}( $authorizationCode = $paymentResponseDoc.valueOf('/JsonRoot/processorInformation/authorizationCode') )
+              #{set}( $networkTransactionId = $paymentResponseDoc.valueOf('/JsonRoot/processorInformation/networkTransactionId') )
 
               #{if} ($StringUtils.equals($transactionStatus, 'AUTHORIZED'))
               #{set}( $zuoraResponseCode = 'Approved' )
@@ -366,6 +367,10 @@
         {
           "field_name": "GatewayReferenceId",
           "field_value_expression": "$!gatewayReferenceId"
+        },
+        {
+          "field_name": "MITReceivedTXID",
+          "field_value_expression": "$!networkTransactionId"
         }
       ]
     }
