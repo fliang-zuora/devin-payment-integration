@@ -71,41 +71,7 @@
     },
     {
       "field_name": "Block-Error-Handler",
-      "field_value_expression": "
-      #[[
-      #{set}($inputResponseBody = $blockInputs[0])
-      #{set}($inputResponseCode = $blockInputs[1])
-
-      #{set}( $zuoraResponseCode = 'Failed' )
-      #{set}( $gatewayResponseCode = $inputResponseCode )
-
-      ## deal with 4xx error
-      #{if}($StringUtils.startsWith($inputResponseCode, '4'))
-      #{if}($StringUtils.equalsAny($inputResponseCode, '409', '429')
-      || ($StringUtils.isNotBlank(${Framework-Idempotent-Retry-Times})
-      && $ZUtility.parseStringToInt(${Framework-Idempotent-Retry-Times}) > 0
-      && $StringUtils.equals($inputResponseCode, '401'))
-      )
-      #{set}( $zuoraResponseCode = 'Unknown' )
-      #{end}
-
-      #{set}( $errorResponseDoc = $ZUtility.parseJsonDocument($inputResponseBody) )
-
-      ## extract error information
-      #{set}( $cyberSourceErrorReason = $errorResponseDoc.valueOf('//reason') )
-      #{set}( $cyberSourceErrorMessage = $errorResponseDoc.valueOf('//message') )
-      #{set}( $cyberSourceTransactionId = $errorResponseDoc.valueOf('//id') )
-
-      #{set}( $gatewayResponseMessage = \"[$cyberSourceErrorReason] $cyberSourceErrorMessage\" )
-      #{set}( $gatewayReferenceId = $cyberSourceTransactionId )
-      ## deal with 5xx error
-      #{elseif}($inputResponseCode && ($inputResponseCode.length() == 3) && $StringUtils.startsWith($inputResponseCode, '5'))
-      #{set}( $zuoraResponseCode = 'Unknown' )
-      #{else}
-      #{set}( $gatewayResponseMessage = 'Something is wrong on CyberSource end.' )
-      #{end}
-    ]]#
-  "
+      "field_value_expression": "\n      #[[\n      #{set}($inputResponseBody = $blockInputs[0])\n      #{set}($inputResponseCode = $blockInputs[1])\n\n      #{set}( $zuoraResponseCode = 'Failed' )\n      #{set}( $gatewayResponseCode = $inputResponseCode )\n\n      ## deal with 4xx error\n      #{if}($StringUtils.startsWith($inputResponseCode, '4'))\n      #{if}($StringUtils.equalsAny($inputResponseCode, '409', '429')\n      || ($StringUtils.isNotBlank(${Framework-Idempotent-Retry-Times})\n      && $ZUtility.parseStringToInt(${Framework-Idempotent-Retry-Times}) > 0\n      && $StringUtils.equals($inputResponseCode, '401'))\n      )\n      #{set}( $zuoraResponseCode = 'Unknown' )\n      #{end}\n\n      #{set}( $errorResponseDoc = $ZUtility.parseJsonDocument($inputResponseBody) )\n\n      ## extract error information\n      #{set}( $cyberSourceErrorReason = $errorResponseDoc.valueOf('//reason') )\n      #{set}( $cyberSourceErrorMessage = $errorResponseDoc.valueOf('//message') )\n      #{set}( $cyberSourceTransactionId = $errorResponseDoc.valueOf('//id') )\n\n      #{set}( $gatewayResponseMessage = \\\"[$cyberSourceErrorReason] $cyberSourceErrorMessage\\\" )\n      #{set}( $gatewayReferenceId = $cyberSourceTransactionId )\n      ## deal with 5xx error\n      #{elseif}($inputResponseCode && ($inputResponseCode.length() == 3) && $StringUtils.startsWith($inputResponseCode, '5'))\n      #{set}( $zuoraResponseCode = 'Unknown' )\n      #{else}\n      #{set}( $gatewayResponseMessage = 'Something is wrong on CyberSource end.' )\n      #{end}\n    ]]#\n  "
     },
     {
       "field_name": "Block-Construct-Card-PaymentInformation",
