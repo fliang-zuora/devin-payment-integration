@@ -1,0 +1,416 @@
+{
+  "gateway_type": "CyberSource",
+  "gateway_version": "2",
+  "display_name": "CyberSource v2",
+  "gateway_revision": 1,
+  "status": "Draft",
+  "request_language": "Raw",
+  "card_types": [
+    "Visa",
+    "MasterCard",
+    "AmericanExpress",
+    "Discover",
+    "Diners",
+    "JCB"
+  ],
+  "idempotency_support": {
+    "key_spec": "UUIDv4",
+    "retry_window_opened_at": 300,
+    "retry_window_closed_at": 144000
+  },
+  "mit_support_list": [
+    {
+      "payment_method_type": "CreditCard",
+      "brand": "Visa",
+      "profile_types": ["Recurring"]
+    },
+    {
+      "payment_method_type": "CreditCard",
+      "brand": "Mastercard",
+      "profile_types": ["Recurring"]
+    },
+    {
+      "payment_method_type": "CreditCard",
+      "brand": "AmericanExpress",
+      "profile_types": ["Recurring"]
+    },
+    {
+      "payment_method_type": "CreditCard",
+      "brand": "Discover",
+      "profile_types": ["Recurring"]
+    },
+    {
+      "payment_method_type": "CreditCard",
+      "brand": "Diners",
+      "profile_types": ["Recurring"]
+    },
+    {
+      "payment_method_type": "CreditCard",
+      "brand": "JCB",
+      "profile_types": ["Recurring"]
+    }
+  ],
+  "moto_support_list": [
+    {
+      "payment_method_type": "CreditCard",
+      "allow_create_scp": true
+    }
+  ],
+  "global_fields": [
+    {
+      "field_name": "Header-Content-Type",
+      "field_value_expression": "application/json"
+    },
+    {
+      "field_name": "Header-Authorization",
+      "field_value_expression": "Bearer #{if}($StringUtils.isNotBlank($OAuth2Token))$!OAuth2Token#{else}$!SecretKey#{end}"
+    },
+    {
+      "field_name": "Header-v-c-merchant-id",
+      "field_value_expression": "$!MerchantId"
+    },
+    {
+      "field_name": "Block-Error-Handler",
+      "field_value_expression": "
+      #[[
+      #{set}($inputResponseBody = $blockInputs[0])
+      #{set}($inputResponseCode = $blockInputs[1])
+
+      #{set}( $zuoraResponseCode = 'Failed' )
+      #{set}( $gatewayResponseCode = $inputResponseCode )
+
+      ## deal with 4xx error
+      #{if}($StringUtils.startsWith($inputResponseCode, '4'))
+      #{if}($StringUtils.equalsAny($inputResponseCode, '409', '429')
+      || ($StringUtils.isNotBlank(${Framework-Idempotent-Retry-Times})
+      && $ZUtility.parseStringToInt(${Framework-Idempotent-Retry-Times}) > 0
+      && $StringUtils.equals($inputResponseCode, '401'))
+      )
+      #{set}( $zuoraResponseCode = 'Unknown' )
+      #{end}
+
+      #{set}( $errorResponseDoc = $ZUtility.parseJsonDocument($inputResponseBody) )
+
+      ## extract error information
+      #{set}( $cyberSourceErrorReason = $errorResponseDoc.valueOf('//reason') )
+      #{set}( $cyberSourceErrorMessage = $errorResponseDoc.valueOf('//message') )
+      #{set}( $cyberSourceTransactionId = $errorResponseDoc.valueOf('//id') )
+
+      #{set}( $gatewayResponseMessage = \"[$cyberSourceErrorReason] $cyberSourceErrorMessage\" )
+      #{set}( $gatewayReferenceId = $cyberSourceTransactionId )
+      ## deal with 5xx error
+      #{elseif}($inputResponseCode && ($inputResponseCode.length() == 3) && $StringUtils.startsWith($inputResponseCode, '5'))
+      #{set}( $zuoraResponseCode = 'Unknown' )
+      #{else}
+      #{set}( $gatewayResponseMessage = 'Something is wrong on CyberSource end.' )
+      #{end}
+    ]]#
+  "
+    },
+    {
+      "field_name": "Block-Construct-Card-PaymentInformation",
+      "field_value_expression": "
+      #[[
+      #{set}( $macroReturn = {
+      'paymentInformation': {
+        'card': {
+          'number': $!CreditCardNumber,
+          'expirationMonth': $!CreditCardExpirationMonth,
+          'expirationYear': $!CreditCardExpirationYear
+        }
+      }
+      } )
+
+      ## set card security code
+      #{if}($StringUtils.isNotBlank($!CreditCardSecurityCode))
+      #{set}( $macroReturn['paymentInformation']['card']['securityCode'] = $!CreditCardSecurityCode )
+      #{end}
+      ]]#
+      "
+    },
+    {
+      "field_name": "Block-Construct-OrderInformation",
+      "field_value_expression": "
+      #[[
+      #{set}( $macroReturn = {
+      'orderInformation': {
+        'amountDetails': {
+          'totalAmount': $!Amount,
+          'currency': $!Currency
+        }
+      }
+      } )
+
+      ## set billing information
+      #{if}($StringUtils.isNotBlank($!CreditCardHolderName))
+      #{set}( $macroReturn['orderInformation']['billTo'] = {} )
+      #{set}( $macroReturn['orderInformation']['billTo']['firstName'] = $!FirstName )
+      #{set}( $macroReturn['orderInformation']['billTo']['lastName'] = $!LastName )
+      #{end}
+
+      ## set billing country
+      #{set}( $macroTwoCharCountryCode = $ZUtility.get2DigitCountryCode($!CreditCardCountry) )
+      #{if} ($StringUtils.isBlank($macroTwoCharCountryCode))
+      #{set}( $macroBillToCountry = $!CreditCardCountry )
+      #{else}
+      #{set}( $macroBillToCountry = $macroTwoCharCountryCode )
+      #{end}
+      #{if}($StringUtils.isNotBlank($macroBillToCountry))
+      #{if}(!$macroReturn['orderInformation']['billTo'])
+      #{set}( $macroReturn['orderInformation']['billTo'] = {} )
+      #{end}
+      #{set}( $macroReturn['orderInformation']['billTo']['country'] = $macroBillToCountry )
+      #{end}
+
+      ## set billing state
+      #{set}( $macroTwoCharStateCode = $ZUtility.get2LetterStateCode($CreditCardCountry, $CreditCardState) )
+      #{if} ($StringUtils.isBlank($macroTwoCharStateCode))
+      #{set}( $macroBillToState = $!CreditCardState )
+      #{else}
+      #{set}( $macroBillToState = $macroTwoCharStateCode )
+      #{end}
+      #{if}($StringUtils.isNotBlank($macroBillToState))
+      #{if}(!$macroReturn['orderInformation']['billTo'])
+      #{set}( $macroReturn['orderInformation']['billTo'] = {} )
+      #{end}
+      #{set}( $macroReturn['orderInformation']['billTo']['administrativeArea'] = $macroBillToState )
+      #{end}
+
+      ## set billing city
+      #{if}($StringUtils.isNotBlank($CreditCardCity))
+      #{if}(!$macroReturn['orderInformation']['billTo'])
+      #{set}( $macroReturn['orderInformation']['billTo'] = {} )
+      #{end}
+      #{set}( $macroReturn['orderInformation']['billTo']['locality'] = $!CreditCardCity )
+      #{end}
+
+      ## set billing address1
+      #{if}($StringUtils.isNotBlank($CreditCardAddress1))
+      #{if}(!$macroReturn['orderInformation']['billTo'])
+      #{set}( $macroReturn['orderInformation']['billTo'] = {} )
+      #{end}
+      #{set}( $macroReturn['orderInformation']['billTo']['address1'] = $!CreditCardAddress1 )
+      #{end}
+
+      ## set billing address2
+      #{if}($StringUtils.isNotBlank($CreditCardAddress2))
+      #{if}(!$macroReturn['orderInformation']['billTo'])
+      #{set}( $macroReturn['orderInformation']['billTo'] = {} )
+      #{end}
+      #{set}( $macroReturn['orderInformation']['billTo']['address2'] = $!CreditCardAddress2 )
+      #{end}
+
+      ## set billing postal code
+      #{if}($StringUtils.isNotBlank($CreditCardPostalCode))
+      #{if}(!$macroReturn['orderInformation']['billTo'])
+      #{set}( $macroReturn['orderInformation']['billTo'] = {} )
+      #{end}
+      #{set}( $macroReturn['orderInformation']['billTo']['postalCode'] = $!CreditCardPostalCode )
+      #{end}
+
+      ## set billing email
+      #{if} ($StringUtils.isNotBlank($Email))
+      #{set}( $macroBillToEmail = $Email )
+      #{elseif} ($StringUtils.isNotEmpty($DefaultBillToEmail))
+      #{set}( $macroBillToEmail = $DefaultBillToEmail )
+      #{end}
+      #{if} ($StringUtils.isNotBlank($macroBillToEmail))
+      #{if}(!$macroReturn['orderInformation']['billTo'])
+      #{set}( $macroReturn['orderInformation']['billTo'] = {} )
+      #{end}
+      #{set}( $macroReturn['orderInformation']['billTo']['email'] = $macroBillToEmail )
+      #{end}
+      ]]#
+      "
+    },
+    {
+      "field_name": "Block-Construct-ClientReferenceInformation",
+      "field_value_expression": "
+      #[[
+      #{set}( $macroReturn = {
+      'clientReferenceInformation': {
+        'code': $ZUtility.getUUID(32)
+      }
+      } )
+
+      ## set payment number as reconciliation ID
+      #{if}($StringUtils.isNotBlank($!PaymentNumber))
+      #{set}( $macroReturn['clientReferenceInformation']['reconciliationId'] = $!PaymentNumber )
+      #{end}
+
+      ## set transaction ID
+      #{if}($StringUtils.isNotBlank($!TransactionId))
+      #{set}( $macroReturn['clientReferenceInformation']['transactionId'] = $!TransactionId )
+      #{end}
+      ]]#
+      "
+    },
+    {
+      "field_name": "Block-Construct-ProcessingInformation",
+      "field_value_expression": "
+      #[[
+      #{set}( $macroReturn = {
+      'processingInformation': {
+        'capture': false,
+        'commerceIndicator': 'internet'
+      }
+      } )
+
+      ## set processor ID if available
+      #{if}($StringUtils.isNotBlank($!ProcessorId))
+      #{set}( $macroReturn['processingInformation']['processorId'] = $!ProcessorId )
+      #{end}
+      ]]#
+      "
+    }
+  ],
+  "operations": [
+    {
+      "operation_name": "Authorization",
+      "operation_type": "Authorization",
+      "transactions": [
+        {
+          "transaction_name": "ProcessPayment",
+          "connector_type": "HTTPs",
+          "transaction_request_fields": [
+            {
+              "temporary": true,
+              "field_name": "_",
+              "field_value_expression": "
+              ## construct payment request
+              #{set}( $paymentRequestMap = {} )
+
+              ## add client reference information
+              #evaluate(${Block-Construct-ClientReferenceInformation})
+              $paymentRequestMap.putAll($macroReturn)
+
+              ## add payment information
+              #evaluate(${Block-Construct-Card-PaymentInformation})
+              $paymentRequestMap.putAll($macroReturn)
+
+              ## add order information
+              #evaluate(${Block-Construct-OrderInformation})
+              $paymentRequestMap.putAll($macroReturn)
+
+              ## add processing information
+              #evaluate(${Block-Construct-ProcessingInformation})
+              $paymentRequestMap.putAll($macroReturn)
+
+              #{set}( $requestBody = $ZUtility.toJsonString($paymentRequestMap) )
+              "
+            },
+            {
+              "field_name": "URL",
+              "field_value_expression": "https://apitest.cybersource.com/pts/v2/payments"
+            },
+            {
+              "field_name": "METHOD",
+              "field_value_expression": "POST"
+            },
+            {
+              "field_name": "Content-Type",
+              "field_value_expression": "${Header-Content-Type}"
+            },
+            {
+              "field_name": "Authorization",
+              "field_value_expression": "${Header-Authorization}"
+            },
+            {
+              "field_name": "v-c-merchant-id",
+              "field_value_expression": "${Header-v-c-merchant-id}"
+            },
+            {
+              "field_name": "REQUEST_BODY",
+              "field_value_expression": "${requestBody}"
+            }
+          ],
+          "request_to_log": "Request = [${requestBody}; URL = $!URL]",
+          "transaction_response_fields": [
+            {
+              "field_name": "_",
+              "field_value_expression": "
+              ## Create response body
+              #{if} (!$StringUtils.equals($last_status_code, '201'))
+              #{set}( $responseBody = $last_message_body )
+              #{else}
+              #{set}( $responseBody = $last_message_body )
+              #{end}
+
+              #{if} (!$StringUtils.equals($last_status_code, '201'))
+              #{set}($blockInputs = [$last_message_body, $last_status_code])
+              #evaluate(${Block-Error-Handler})
+              #{stop}
+              #{else}
+              #{set}( $gatewayResponseCode = '201' )
+              #{set}( $gatewayResponseMessage = 'Approved' )
+              #{end}
+
+              ## Parse Response JSON Document
+              #{set}( $paymentResponseDoc = $ZUtility.parseJsonDocument($last_message_body) )
+
+              #{set}( $transactionId = $paymentResponseDoc.valueOf('/JsonRoot/id') )
+              #{set}( $transactionStatus = $paymentResponseDoc.valueOf('/JsonRoot/status') )
+              #{set}( $processorTransactionId = $paymentResponseDoc.valueOf('/JsonRoot/processorInformation/transactionId') )
+              #{set}( $authorizationCode = $paymentResponseDoc.valueOf('/JsonRoot/processorInformation/authorizationCode') )
+
+              #{if} ($StringUtils.equals($transactionStatus, 'AUTHORIZED'))
+              #{set}( $zuoraResponseCode = 'Approved' )
+              #{else}
+              #{set}( $zuoraResponseCode = 'Failed' )
+              #{end}
+
+              #{set}( $gatewayReferenceId = $transactionId )
+              "
+            },
+            {
+              "in_transaction_log": "true",
+              "field_name": "ResponseBody",
+              "field_value_expression": "$!responseBody"
+            },
+            {
+              "in_transaction_log": "true",
+              "field_name": "ResponseCode",
+              "field_value_expression": "$!last_status_code"
+            }
+          ],
+          "response_fsm_event_expression": "#{if}($StringUtils.equals($zuoraResponseCode, 'Approved'))Success#{else}Error#{end}"
+        }
+      ],
+      "operation_states": [
+        {
+          "start_state": "BEGIN",
+          "transaction_event": "",
+          "end_state": "ProcessPayment"
+        },
+        {
+          "start_state": "ProcessPayment",
+          "transaction_event": "Success",
+          "end_state": "END"
+        },
+        {
+          "start_state": "ProcessPayment",
+          "transaction_event": "Error",
+          "end_state": "END"
+        }
+      ],
+      "operation_response_fields": [
+        {
+          "field_name": "ZuoraResponseCode",
+          "field_value_expression": "$!zuoraResponseCode"
+        },
+        {
+          "field_name": "GatewayResponseCode",
+          "field_value_expression": "$!gatewayResponseCode"
+        },
+        {
+          "field_name": "GatewayResponseMessage",
+          "field_value_expression": "$!gatewayResponseMessage"
+        },
+        {
+          "field_name": "GatewayReferenceId",
+          "field_value_expression": "$!gatewayReferenceId"
+        }
+      ]
+    }
+  ]
+}
