@@ -465,6 +465,12 @@
               #evaluate(${Block-Construct-ProcessingInformation})
               $validationRequestMap.putAll($macroReturn)
 
+              ## override capture setting for validation - authorize only, do not capture
+              #{if}(!$validationRequestMap.containsKey('processingInformation'))
+              #{set}( $validationRequestMap['processingInformation'] = {} )
+              #{end}
+              #{set}( $validationRequestMap['processingInformation']['capture'] = false )
+
               #{set}( $requestBody = $ZUtility.toJsonString($validationRequestMap) )
               "
             },
@@ -571,6 +577,12 @@
               ## add processing information
               #evaluate(${Block-Construct-ProcessingInformation})
               $paymentRequestMap.putAll($macroReturn)
+
+              ## override capture setting for validation - authorize only, do not capture
+              #{if}(!$paymentRequestMap.containsKey('processingInformation'))
+              #{set}( $paymentRequestMap['processingInformation'] = {} )
+              #{end}
+              #{set}( $paymentRequestMap['processingInformation']['capture'] = false )
 
               #{set}( $requestBody = $ZUtility.toJsonString($paymentRequestMap) )
               "
