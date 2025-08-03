@@ -258,7 +258,7 @@
             },
             {
               "field_name": "URL",
-              "field_value_expression": "https://apitest.cybersource.com/pts/v2/payments"
+              "field_value_expression": "#{if}($isTest)https://apitest.cybersource.com#{else}https://api.cybersource.com#{end}/pts/v2/payments"
             },
             {
               "field_name": "METHOD",
@@ -476,7 +476,7 @@
             },
             {
               "field_name": "URL",
-              "field_value_expression": "https://apitest.cybersource.com/pts/v2/payments"
+              "field_value_expression": "#{if}($isTest)https://apitest.cybersource.com#{else}https://api.cybersource.com#{end}/pts/v2/payments"
             },
             {
               "field_name": "METHOD",
@@ -589,7 +589,7 @@
             },
             {
               "field_name": "URL",
-              "field_value_expression": "https://apitest.cybersource.com/pts/v2/payments"
+              "field_value_expression": "#{if}($isTest)https://apitest.cybersource.com#{else}https://api.cybersource.com#{end}/pts/v2/payments"
             },
             {
               "field_name": "METHOD",
@@ -689,7 +689,7 @@
             },
             {
               "field_name": "URL",
-              "field_value_expression": "https://apitest.cybersource.com/pts/v2/payments/${authTransactionId}/voids"
+              "field_value_expression": "#{if}($isTest)https://apitest.cybersource.com#{else}https://api.cybersource.com#{end}/pts/v2/payments/${authTransactionId}/voids"
             },
             {
               "field_name": "METHOD",
