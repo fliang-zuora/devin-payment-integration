@@ -373,6 +373,456 @@
           "field_value_expression": "$!networkTransactionId"
         }
       ]
+    },
+    {
+      "payment_method_type": "CreditCard",
+      "operation_type": "Validate",
+      "transactions": [
+        {
+          "transaction_name": "checkAmountForValidation",
+          "transaction_type": "InternalProcessing",
+          "connector_type": "Test",
+          "transaction_request_fields": [
+            {
+              "temporary": true,
+              "field_name": "isZeroAmount",
+              "field_value_expression": "#{if}($StringUtils.equals($Amount, '0') || $StringUtils.equals($Amount, '0.00'))true#{else}false#{end}"
+            }
+          ],
+          "request_to_log": "Check if amount is zero for validation: Amount = $!Amount",
+          "transaction_response_fields": [],
+          "response_fsm_event_expression": "#{if}($StringUtils.equals($isZeroAmount, 'true'))Success#{else}Error#{end}"
+        },
+        {
+          "transaction_name": "ProcessZeroAmountValidation",
+          "connector_type": "HTTPs",
+          "transaction_request_fields": [
+            {
+              "temporary": true,
+              "field_name": "_",
+              "field_value_expression": "
+              ## construct validation request with zero amount
+              #{set}( $validationRequestMap = {} )
+
+              ## add client reference information
+              #evaluate(${Block-Construct-ClientReferenceInformation})
+              $validationRequestMap.putAll($macroReturn)
+
+              ## add payment information
+              #evaluate(${Block-Construct-Card-PaymentInformation})
+              $validationRequestMap.putAll($macroReturn)
+
+              ## add order information with zero amount
+              #{set}( $macroReturn = {
+              'orderInformation': {
+                'amountDetails': {
+                  'totalAmount': '0.00',
+                  'currency': $!Currency
+                }
+              }
+              } )
+
+              ## set billing information if available
+              #{if}($StringUtils.isNotBlank($!CreditCardHolderName) || $StringUtils.isNotBlank($!FirstName) || $StringUtils.isNotBlank($!LastName))
+              #{set}( $macroReturn['orderInformation']['billTo'] = {} )
+              
+              #{if}($StringUtils.isNotBlank($!FirstName))
+              #{set}( $macroReturn['orderInformation']['billTo']['firstName'] = $!FirstName )
+              #{end}
+              
+              #{if}($StringUtils.isNotBlank($!LastName))
+              #{set}( $macroReturn['orderInformation']['billTo']['lastName'] = $!LastName )
+              #{end}
+              
+              #{if}($StringUtils.isNotBlank($!CreditCardAddress1))
+              #{set}( $macroReturn['orderInformation']['billTo']['address1'] = $!CreditCardAddress1 )
+              #{end}
+              
+              #{if}($StringUtils.isNotBlank($!CreditCardCity))
+              #{set}( $macroReturn['orderInformation']['billTo']['locality'] = $!CreditCardCity )
+              #{end}
+              
+              #{if}($StringUtils.isNotBlank($!CreditCardState))
+              #{set}( $macroReturn['orderInformation']['billTo']['administrativeArea'] = $!CreditCardState )
+              #{end}
+              
+              #{if}($StringUtils.isNotBlank($!CreditCardPostalCode))
+              #{set}( $macroReturn['orderInformation']['billTo']['postalCode'] = $!CreditCardPostalCode )
+              #{end}
+              
+              #{if}($StringUtils.isNotBlank($!CreditCardCountry))
+              #{set}( $macroReturn['orderInformation']['billTo']['country'] = $!CreditCardCountry )
+              #{end}
+              
+              #{if}($StringUtils.isNotBlank($!Email))
+              #{set}( $macroReturn['orderInformation']['billTo']['email'] = $!Email )
+              #{end}
+              #{end}
+
+              $validationRequestMap.putAll($macroReturn)
+
+              ## add processing information
+              #evaluate(${Block-Construct-ProcessingInformation})
+              $validationRequestMap.putAll($macroReturn)
+
+              #{set}( $requestBody = $ZUtility.toJsonString($validationRequestMap) )
+              "
+            },
+            {
+              "field_name": "URL",
+              "field_value_expression": "https://apitest.cybersource.com/pts/v2/payments"
+            },
+            {
+              "field_name": "METHOD",
+              "field_value_expression": "POST"
+            },
+            {
+              "field_name": "Content-Type",
+              "field_value_expression": "${Header-Content-Type}"
+            },
+            {
+              "field_name": "Authorization",
+              "field_value_expression": "${Header-Authorization}"
+            },
+            {
+              "field_name": "v-c-merchant-id",
+              "field_value_expression": "${Header-v-c-merchant-id}"
+            },
+            {
+              "field_name": "REQUEST_BODY",
+              "field_value_expression": "${requestBody}"
+            }
+          ],
+          "request_to_log": "Request = [${requestBody}; URL = $!URL]",
+          "transaction_response_fields": [
+            {
+              "field_name": "_",
+              "field_value_expression": "
+              ## Create response body
+              #{if} (!$StringUtils.equals($last_status_code, '201'))
+              #{set}( $responseBody = $last_message_body )
+              #{else}
+              #{set}( $responseBody = $last_message_body )
+              #{end}
+
+              #{if} (!$StringUtils.equals($last_status_code, '201'))
+              #{set}($blockInputs = [$last_message_body, $last_status_code])
+              #evaluate(${Block-Error-Handler})
+              #{stop}
+              #{else}
+              #{set}( $gatewayResponseCode = '201' )
+              #{set}( $gatewayResponseMessage = 'Validation Approved' )
+              #{end}
+
+              ## Parse Response JSON Document
+              #{set}( $validationResponseDoc = $ZUtility.parseJsonDocument($last_message_body) )
+
+              #{set}( $transactionId = $validationResponseDoc.valueOf('/JsonRoot/id') )
+              #{set}( $transactionStatus = $validationResponseDoc.valueOf('/JsonRoot/status') )
+              #{set}( $processorTransactionId = $validationResponseDoc.valueOf('/JsonRoot/processorInformation/transactionId') )
+              #{set}( $authorizationCode = $validationResponseDoc.valueOf('/JsonRoot/processorInformation/authorizationCode') )
+              #{set}( $networkTransactionId = $validationResponseDoc.valueOf('/JsonRoot/processorInformation/networkTransactionId') )
+
+              #{if} ($StringUtils.equals($transactionStatus, 'AUTHORIZED'))
+              #{set}( $zuoraResponseCode = 'Approved' )
+              #{else}
+              #{set}( $zuoraResponseCode = 'Failed' )
+              #{end}
+
+              #{set}( $gatewayReferenceId = $transactionId )
+              "
+            },
+            {
+              "in_transaction_log": "true",
+              "field_name": "ResponseBody",
+              "field_value_expression": "$!responseBody"
+            },
+            {
+              "in_transaction_log": "true",
+              "field_name": "ResponseCode",
+              "field_value_expression": "$!last_status_code"
+            }
+          ],
+          "response_fsm_event_expression": "#{if}($StringUtils.equals($zuoraResponseCode, 'Approved'))Success#{else}Error#{end}"
+        },
+        {
+          "transaction_name": "ProcessNonZeroAmountAuth",
+          "connector_type": "HTTPs",
+          "transaction_request_fields": [
+            {
+              "temporary": true,
+              "field_name": "_",
+              "field_value_expression": "
+              ## construct payment request with actual amount
+              #{set}( $paymentRequestMap = {} )
+
+              ## add client reference information
+              #evaluate(${Block-Construct-ClientReferenceInformation})
+              $paymentRequestMap.putAll($macroReturn)
+
+              ## add payment information
+              #evaluate(${Block-Construct-Card-PaymentInformation})
+              $paymentRequestMap.putAll($macroReturn)
+
+              ## add order information
+              #evaluate(${Block-Construct-OrderInformation})
+              $paymentRequestMap.putAll($macroReturn)
+
+              ## add processing information
+              #evaluate(${Block-Construct-ProcessingInformation})
+              $paymentRequestMap.putAll($macroReturn)
+
+              #{set}( $requestBody = $ZUtility.toJsonString($paymentRequestMap) )
+              "
+            },
+            {
+              "field_name": "URL",
+              "field_value_expression": "https://apitest.cybersource.com/pts/v2/payments"
+            },
+            {
+              "field_name": "METHOD",
+              "field_value_expression": "POST"
+            },
+            {
+              "field_name": "Content-Type",
+              "field_value_expression": "${Header-Content-Type}"
+            },
+            {
+              "field_name": "Authorization",
+              "field_value_expression": "${Header-Authorization}"
+            },
+            {
+              "field_name": "v-c-merchant-id",
+              "field_value_expression": "${Header-v-c-merchant-id}"
+            },
+            {
+              "field_name": "REQUEST_BODY",
+              "field_value_expression": "${requestBody}"
+            }
+          ],
+          "request_to_log": "Request = [${requestBody}; URL = $!URL]",
+          "transaction_response_fields": [
+            {
+              "field_name": "_",
+              "field_value_expression": "
+              ## Create response body
+              #{if} (!$StringUtils.equals($last_status_code, '201'))
+              #{set}( $responseBody = $last_message_body )
+              #{else}
+              #{set}( $responseBody = $last_message_body )
+              #{end}
+
+              #{if} (!$StringUtils.equals($last_status_code, '201'))
+              #{set}($blockInputs = [$last_message_body, $last_status_code])
+              #evaluate(${Block-Error-Handler})
+              #{stop}
+              #{else}
+              #{set}( $gatewayResponseCode = '201' )
+              #{set}( $gatewayResponseMessage = 'Authorization Approved' )
+              #{end}
+
+              ## Parse Response JSON Document
+              #{set}( $authResponseDoc = $ZUtility.parseJsonDocument($last_message_body) )
+
+              #{set}( $authTransactionId = $authResponseDoc.valueOf('/JsonRoot/id') )
+              #{set}( $transactionStatus = $authResponseDoc.valueOf('/JsonRoot/status') )
+              #{set}( $processorTransactionId = $authResponseDoc.valueOf('/JsonRoot/processorInformation/transactionId') )
+              #{set}( $authorizationCode = $authResponseDoc.valueOf('/JsonRoot/processorInformation/authorizationCode') )
+              #{set}( $networkTransactionId = $authResponseDoc.valueOf('/JsonRoot/processorInformation/networkTransactionId') )
+
+              #{if} ($StringUtils.equals($transactionStatus, 'AUTHORIZED'))
+              #{set}( $zuoraResponseCode = 'Approved' )
+              #{else}
+              #{set}( $zuoraResponseCode = 'Failed' )
+              #{end}
+
+              #{set}( $gatewayReferenceId = $authTransactionId )
+              "
+            },
+            {
+              "in_transaction_log": "true",
+              "field_name": "ResponseBody",
+              "field_value_expression": "$!responseBody"
+            },
+            {
+              "in_transaction_log": "true",
+              "field_name": "ResponseCode",
+              "field_value_expression": "$!last_status_code"
+            }
+          ],
+          "response_fsm_event_expression": "#{if}($StringUtils.equals($zuoraResponseCode, 'Approved'))Success#{else}Error#{end}"
+        },
+        {
+          "transaction_name": "VoidNonZeroAmountAuth",
+          "connector_type": "HTTPs",
+          "transaction_request_fields": [
+            {
+              "temporary": true,
+              "field_name": "_",
+              "field_value_expression": "
+              ## construct void request
+              #{set}( $voidRequestMap = {
+              'clientReferenceInformation': {
+                'code': $ZUtility.getUUID(32)
+              }
+              } )
+
+              ## set payment number as reconciliation ID
+              #{if}($StringUtils.isNotBlank($!PaymentNumber))
+              #{set}( $voidRequestMap['clientReferenceInformation']['reconciliationId'] = $!PaymentNumber )
+              #{end}
+
+              #{set}( $requestBody = $ZUtility.toJsonString($voidRequestMap) )
+              "
+            },
+            {
+              "field_name": "URL",
+              "field_value_expression": "https://apitest.cybersource.com/pts/v2/payments/${authTransactionId}/voids"
+            },
+            {
+              "field_name": "METHOD",
+              "field_value_expression": "POST"
+            },
+            {
+              "field_name": "Content-Type",
+              "field_value_expression": "${Header-Content-Type}"
+            },
+            {
+              "field_name": "Authorization",
+              "field_value_expression": "${Header-Authorization}"
+            },
+            {
+              "field_name": "v-c-merchant-id",
+              "field_value_expression": "${Header-v-c-merchant-id}"
+            },
+            {
+              "field_name": "REQUEST_BODY",
+              "field_value_expression": "${requestBody}"
+            }
+          ],
+          "request_to_log": "Void Request = [${requestBody}; URL = $!URL]",
+          "transaction_response_fields": [
+            {
+              "field_name": "_",
+              "field_value_expression": "
+              ## Create response body
+              #{if} (!$StringUtils.equals($last_status_code, '201'))
+              #{set}( $responseBody = $last_message_body )
+              #{else}
+              #{set}( $responseBody = $last_message_body )
+              #{end}
+
+              #{if} (!$StringUtils.equals($last_status_code, '201'))
+              #{set}($blockInputs = [$last_message_body, $last_status_code])
+              #evaluate(${Block-Error-Handler})
+              #{stop}
+              #{else}
+              #{set}( $gatewayResponseCode = '201' )
+              #{set}( $gatewayResponseMessage = 'Validation Completed - Authorization Voided' )
+              #{end}
+
+              ## Parse Response JSON Document
+              #{set}( $voidResponseDoc = $ZUtility.parseJsonDocument($last_message_body) )
+
+              #{set}( $voidTransactionId = $voidResponseDoc.valueOf('/JsonRoot/id') )
+              #{set}( $voidStatus = $voidResponseDoc.valueOf('/JsonRoot/status') )
+
+              #{if} ($StringUtils.equals($voidStatus, 'VOIDED'))
+              #{set}( $zuoraResponseCode = 'Approved' )
+              #{else}
+              #{set}( $zuoraResponseCode = 'Failed' )
+              #{end}
+
+              #{set}( $gatewayReferenceId = $voidTransactionId )
+              "
+            },
+            {
+              "in_transaction_log": "true",
+              "field_name": "ResponseBody",
+              "field_value_expression": "$!responseBody"
+            },
+            {
+              "in_transaction_log": "true",
+              "field_name": "ResponseCode",
+              "field_value_expression": "$!last_status_code"
+            }
+          ],
+          "response_fsm_event_expression": "#{if}($StringUtils.equals($zuoraResponseCode, 'Approved'))Success#{else}Error#{end}"
+        }
+      ],
+      "operation_states": [
+        {
+          "start_state": "BEGIN",
+          "transaction_event": "",
+          "end_state": "checkAmountForValidation"
+        },
+        {
+          "start_state": "checkAmountForValidation",
+          "transaction_event": "Success",
+          "end_state": "ProcessZeroAmountValidation"
+        },
+        {
+          "start_state": "checkAmountForValidation",
+          "transaction_event": "Error",
+          "end_state": "ProcessNonZeroAmountAuth"
+        },
+        {
+          "start_state": "ProcessZeroAmountValidation",
+          "transaction_event": "Success",
+          "end_state": "END"
+        },
+        {
+          "start_state": "ProcessZeroAmountValidation",
+          "transaction_event": "Error",
+          "end_state": "END"
+        },
+        {
+          "start_state": "ProcessNonZeroAmountAuth",
+          "transaction_event": "Success",
+          "end_state": "VoidNonZeroAmountAuth"
+        },
+        {
+          "start_state": "ProcessNonZeroAmountAuth",
+          "transaction_event": "Error",
+          "end_state": "END"
+        },
+        {
+          "start_state": "VoidNonZeroAmountAuth",
+          "transaction_event": "Success",
+          "end_state": "END"
+        },
+        {
+          "start_state": "VoidNonZeroAmountAuth",
+          "transaction_event": "Error",
+          "end_state": "END"
+        }
+      ],
+      "operation_response_fields": [
+        {
+          "field_name": "ZuoraResponseCode",
+          "field_value_expression": "$!zuoraResponseCode"
+        },
+        {
+          "field_name": "GatewayResponseCode",
+          "field_value_expression": "$!gatewayResponseCode"
+        },
+        {
+          "field_name": "GatewayResponseMessage",
+          "field_value_expression": "$!gatewayResponseMessage"
+        },
+        {
+          "field_name": "GatewayReferenceId",
+          "field_value_expression": "$!gatewayReferenceId"
+        },
+        {
+          "field_name": "AuthTransactionId",
+          "field_value_expression": "$!authTransactionId"
+        },
+        {
+          "field_name": "MITReceivedTXID",
+          "field_value_expression": "$!networkTransactionId"
+        }
+      ]
     }
   ]
 }
