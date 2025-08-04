@@ -63,11 +63,34 @@
     },
     {
       "field_name": "Header-Authorization",
-      "field_value_expression": "Bearer #{if}($StringUtils.isNotBlank($OAuth2Token))$!OAuth2Token#{else}$!SecretKey#{end}"
+      "field_value_expression": "${Header-Signature}"
     },
     {
       "field_name": "Header-v-c-merchant-id",
-      "field_value_expression": "$!MerchantId"
+      "field_value_expression": "$!organizationId"
+    },
+    {
+      "field_name": "Header-v-c-date",
+      "field_value_expression": "$ZUtility.formatDate($ZUtility.getCurrentDate(), 'EEE, dd MMM yyyy HH:mm:ss z', 'GMT')"
+    },
+    {
+      "field_name": "Header-Host",
+      "field_value_expression": "#{if}($isTest)apitest.cybersource.com#{else}api.cybersource.com#{end}"
+    },
+    {
+      "field_name": "Header-Signature",
+      "field_value_expression": "
+      #[[
+      ## Construct signature string according to CyberSource requirements
+      #{set}($algorithm = 'HmacSHA256')
+      #{set}($headers = 'host v-c-date request-target digest v-c-merchant-id')
+      #{set}($keyId = $!SharedKey)
+      #{set}($signature = $ZUtility.generateHmacSignature($!sharedsecret, $signatureString, $algorithm))
+      
+      ## Build Authorization header value
+      Signature keyId=\"${keyId}\", algorithm=\"${algorithm}\", headers=\"${headers}\", signature=\"${signature}\"
+      ]]#
+      "
     },
     {
       "field_name": "Block-Error-Handler",
@@ -275,6 +298,14 @@
             {
               "field_name": "v-c-merchant-id",
               "field_value_expression": "${Header-v-c-merchant-id}"
+            },
+            {
+              "field_name": "Host",
+              "field_value_expression": "${Header-Host}"
+            },
+            {
+              "field_name": "v-c-date",
+              "field_value_expression": "${Header-v-c-date}"
             },
             {
               "field_name": "REQUEST_BODY",
@@ -495,6 +526,14 @@
               "field_value_expression": "${Header-v-c-merchant-id}"
             },
             {
+              "field_name": "Host",
+              "field_value_expression": "${Header-Host}"
+            },
+            {
+              "field_name": "v-c-date",
+              "field_value_expression": "${Header-v-c-date}"
+            },
+            {
               "field_name": "REQUEST_BODY",
               "field_value_expression": "${requestBody}"
             }
@@ -608,6 +647,14 @@
               "field_value_expression": "${Header-v-c-merchant-id}"
             },
             {
+              "field_name": "Host",
+              "field_value_expression": "${Header-Host}"
+            },
+            {
+              "field_name": "v-c-date",
+              "field_value_expression": "${Header-v-c-date}"
+            },
+            {
               "field_name": "REQUEST_BODY",
               "field_value_expression": "${requestBody}"
             }
@@ -706,6 +753,14 @@
             {
               "field_name": "v-c-merchant-id",
               "field_value_expression": "${Header-v-c-merchant-id}"
+            },
+            {
+              "field_name": "Host",
+              "field_value_expression": "${Header-Host}"
+            },
+            {
+              "field_name": "v-c-date",
+              "field_value_expression": "${Header-v-c-date}"
             },
             {
               "field_name": "REQUEST_BODY",
@@ -835,6 +890,68 @@
           "field_value_expression": "$!networkTransactionId"
         }
       ]
+    }
+  ],
+  "attributes": [
+    {
+      "display_order": 1,
+      "name": "organizationId",
+      "tip_label": "PaymentGateway.CyberSource.organizationId.tipLabel",
+      "file_suffix": null,
+      "gw_block_type": "Credential",
+      "picklist_label_values": null,
+      "label": "PaymentGateway.CyberSource.organizationId.label",
+      "hidden": false,
+      "is_required": true,
+      "read_only": true,
+      "need_encryption": false,
+      "default_value": null,
+      "tip_description": "Your CyberSource organization ID (merchant ID)",
+      "system_config_key": null,
+      "max_field_length": 256,
+      "min_field_length": -1,
+      "gw_field_type": "Text",
+      "data_source": null
+    },
+    {
+      "display_order": 2,
+      "name": "SharedKey",
+      "tip_label": "PaymentGateway.CyberSource.SharedKey.tipLabel",
+      "file_suffix": null,
+      "gw_block_type": "Credential",
+      "picklist_label_values": null,
+      "label": "PaymentGateway.CyberSource.SharedKey.label",
+      "hidden": false,
+      "is_required": true,
+      "read_only": true,
+      "need_encryption": true,
+      "default_value": null,
+      "tip_description": "CyberSource shared key for HMAC signature generation",
+      "system_config_key": null,
+      "max_field_length": 256,
+      "min_field_length": -1,
+      "gw_field_type": "Text",
+      "data_source": null
+    },
+    {
+      "display_order": 3,
+      "name": "sharedsecret",
+      "tip_label": "PaymentGateway.CyberSource.sharedsecret.tipLabel",
+      "file_suffix": null,
+      "gw_block_type": "Credential",
+      "picklist_label_values": null,
+      "label": "PaymentGateway.CyberSource.sharedsecret.label",
+      "hidden": false,
+      "is_required": true,
+      "read_only": true,
+      "need_encryption": true,
+      "default_value": null,
+      "tip_description": "CyberSource shared secret key for HMAC signature generation",
+      "system_config_key": null,
+      "max_field_length": 256,
+      "min_field_length": -1,
+      "gw_field_type": "Text",
+      "data_source": null
     }
   ]
 }
