@@ -1,0 +1,15 @@
+{
+  "id": "6853441676996176204956",
+  "status": "AUTHORIZED",
+  "processorInformation": {
+    "transactionId": "processor_auth_txn_456",
+    "authorizationCode": "AUTH456",
+    "networkTransactionId": "016150703802096"
+  },
+  "orderInformation": {
+    "amountDetails": {
+      "totalAmount": "100.00",
+      "currency": "USD"
+    }
+  }
+}

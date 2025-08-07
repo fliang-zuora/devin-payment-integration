@@ -1,0 +1,11 @@
+{
+  "id": "6853441676996176204957",
+  "status": "VOIDED",
+  "voidAmountDetails": {
+    "voidAmount": "100.00",
+    "currency": "USD"
+  },
+  "processorInformation": {
+    "transactionId": "processor_void_txn_789"
+  }
+}

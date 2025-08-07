@@ -6,6 +6,7 @@ public class CyberSourcePaymentResult {
     private String gatewayResponseMessage;
     private String gatewayReferenceId;
     private String mitReceivedTxId;
+    private String authTransactionId;
     
     public String getZuoraResponseCode() {
         return zuoraResponseCode;
@@ -45,5 +46,13 @@ public class CyberSourcePaymentResult {
     
     public void setMitReceivedTxId(String mitReceivedTxId) {
         this.mitReceivedTxId = mitReceivedTxId;
+    }
+    
+    public String getAuthTransactionId() {
+        return authTransactionId;
+    }
+    
+    public void setAuthTransactionId(String authTransactionId) {
+        this.authTransactionId = authTransactionId;
     }
 }

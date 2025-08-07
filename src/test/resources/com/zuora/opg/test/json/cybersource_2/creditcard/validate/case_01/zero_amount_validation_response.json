@@ -1,0 +1,15 @@
+{
+  "id": "6853441676996176204955",
+  "status": "AUTHORIZED",
+  "processorInformation": {
+    "transactionId": "processor_validation_txn_123",
+    "authorizationCode": "VALID123",
+    "networkTransactionId": "016150703802095"
+  },
+  "orderInformation": {
+    "amountDetails": {
+      "totalAmount": "0.00",
+      "currency": "USD"
+    }
+  }
+}
