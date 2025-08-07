@@ -292,6 +292,35 @@ public class CyberSourcePaymentProcessor {
             result.setGatewayResponseMessage("Approved");
             result.setGatewayReferenceId(responseJson.path("id").asText());
             result.setMitReceivedTxId(responseJson.path("processorInformation").path("networkTransactionId").asText());
+        } else if (response.getStatusCode() >= 400 && response.getStatusCode() < 500) {
+            String statusCodeStr = String.valueOf(response.getStatusCode());
+            if (statusCodeStr.equals("409") || statusCodeStr.equals("429") || statusCodeStr.equals("401")) {
+                result.setZuoraResponseCode("Unknown");
+            } else {
+                result.setZuoraResponseCode("Declined");
+            }
+            
+            try {
+                JsonNode responseJson = objectMapper.readTree(response.getBody());
+                String reason = responseJson.path("reason").asText();
+                String message = responseJson.path("message").asText();
+                String transactionId = responseJson.path("id").asText();
+                
+                if (!reason.isEmpty() && !message.isEmpty()) {
+                    result.setGatewayResponseMessage("[" + reason + "] " + message);
+                } else {
+                    result.setGatewayResponseMessage("Payment declined");
+                }
+                
+                if (!transactionId.isEmpty()) {
+                    result.setGatewayReferenceId(transactionId);
+                }
+            } catch (Exception e) {
+                result.setGatewayResponseMessage("Payment declined");
+            }
+        } else if (response.getStatusCode() >= 500) {
+            result.setZuoraResponseCode("Unknown");
+            result.setGatewayResponseMessage("Server Error");
         } else {
             result.setZuoraResponseCode("Unknown");
             result.setGatewayResponseMessage("Error: " + response.getBody());

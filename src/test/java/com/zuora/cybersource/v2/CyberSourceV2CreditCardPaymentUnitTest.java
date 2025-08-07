@@ -74,7 +74,24 @@ public class CyberSourceV2CreditCardPaymentUnitTest {
     }
 
     @Test
-    void case_02_ReturnUnknownZuoraResponseCodeWhenGatewayReturns5XXHttpStatus() throws Exception {
+    void case_02_ItShouldReturnDeclinedForPaymentDeclined() throws Exception {
+        String mockResponse = loadJsonFromFile("src/test/resources/com/zuora/opg/test/json/cybersource_2/creditcard/payment/case_02/payment_declined_response.json");
+        
+        when(httpClient.post(any(String.class), any(Map.class), any(String.class)))
+                .thenReturn(new CyberSourceHttpResponse(400, mockResponse));
+
+        Map<String, Object> paymentRequest = createTestPaymentRequest();
+        
+        CyberSourcePaymentResult result = paymentProcessor.processPayment(paymentRequest);
+
+        assertEquals("Declined", result.getZuoraResponseCode());
+        assertEquals("400", result.getGatewayResponseCode());
+        assertEquals("[INSUFFICIENT_FUNDS] Insufficient funds in the account", result.getGatewayResponseMessage());
+        assertEquals("6853441676996176204999", result.getGatewayReferenceId());
+    }
+
+    @Test
+    void case_03_ReturnUnknownZuoraResponseCodeWhenGatewayReturns5XXHttpStatus() throws Exception {
         when(httpClient.post(any(String.class), any(Map.class), any(String.class)))
                 .thenReturn(new CyberSourceHttpResponse(500, "{\"message\":\"Internal Server Error\"}"));
 

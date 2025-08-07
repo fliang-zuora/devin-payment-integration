@@ -1,0 +1,15 @@
+{
+  "id": "6853441676996176204999",
+  "status": "DECLINED",
+  "reason": "INSUFFICIENT_FUNDS",
+  "message": "Insufficient funds in the account",
+  "processorInformation": {
+    "transactionId": "processor_declined_txn_999",
+    "responseCode": "51",
+    "responseDetails": "Insufficient funds"
+  },
+  "errorInformation": {
+    "reason": "INSUFFICIENT_FUNDS",
+    "message": "Insufficient funds in the account"
+  }
+}
