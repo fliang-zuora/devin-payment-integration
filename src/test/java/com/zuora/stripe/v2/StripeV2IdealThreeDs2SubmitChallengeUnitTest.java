@@ -49,7 +49,7 @@ public class StripeV2IdealThreeDs2SubmitChallengeUnitTest extends OpgJsonBaseTes
 
     @Test // OperationId: 07c3cf20c7944ee3b95e787a37b4586b
     public void case_01_ThreeDs2SubmitChallengeSuccessful() {
-        final String retrievePaymentIntent_response = "/com/zuora/billing/opg/test/json/stripe_2/ideal/threeds2submitchallenge/case_01/retrievePaymentIntent_response.json";
+        final String retrievePaymentIntent_response = "/com/zuora/opg/test/json/stripe_2/ideal/threeds2submitchallenge/case_01/retrievePaymentIntent_response.json";
 
         Map<String, String> requestMap = OpgRequestMapHelper.constructThreeDS2SubmitChallengeResultCallRequestMap(paymentMethod, paymentGateway);
         putThreeDS2RequestMappingFields(requestMap);
@@ -80,7 +80,7 @@ public class StripeV2IdealThreeDs2SubmitChallengeUnitTest extends OpgJsonBaseTes
 
     @Test
     public void case_02_ThreeDs2SubmitChallengeFail_WhenInvalidPaymentIntentIdIsPassed() {
-        final String retrievePaymentIntent_response = "/com/zuora/billing/opg/test/json/stripe_2/ideal/threeds2submitchallenge/case_02/retrievePaymentIntent_response.json";
+        final String retrievePaymentIntent_response = "/com/zuora/opg/test/json/stripe_2/ideal/threeds2submitchallenge/case_02/retrievePaymentIntent_response.json";
 
         Map<String, String> requestMap = OpgRequestMapHelper.constructThreeDS2SubmitChallengeResultCallRequestMap(paymentMethod, paymentGateway);
         putThreeDS2RequestMappingFields(requestMap);

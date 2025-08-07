@@ -34,7 +34,7 @@ public class StripeV2CreditCardReferenceRefundUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_01_ItShouldSucceedForNormalRefund() {
-        final String case_01_refund_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcardreference/refund/case_01/refund_response.json";
+        final String case_01_refund_response = "/com/zuora/opg/test/json/stripe_2/creditcardreference/refund/case_01/refund_response.json";
         final String tokenId = "ba_1MAcjnHo3zohLKRe4Quaahlk"; // default_source in the get_customer_status_response.json
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
@@ -120,7 +120,7 @@ public class StripeV2CreditCardReferenceRefundUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_02_ReturnUnknownZuoraResponseCodeWhenGatewayReturns5XXHttpStatus() {
-        final String case_02_refund_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcardreference/refund/case_02/refund_response.json";
+        final String case_02_refund_response = "/com/zuora/opg/test/json/stripe_2/creditcardreference/refund/case_02/refund_response.json";
         final String tokenId = "ba_1MAcjnHo3zohLKRe4Quaahlk"; // default_source in the get_customer_status_response.json
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));

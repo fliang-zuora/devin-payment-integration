@@ -24,7 +24,7 @@ public class StripeV2CreditCardThreeDS2RequestTokenUnitTest extends OpgJsonBaseT
 
     @Test
     public void case_01_ThreeDs2RequestTokenSuccessful() {
-        final String mockedResponse = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/threeds2requesttoken/case_01/createdelayedpaymentIntent_response.json";
+        final String mockedResponse = "/com/zuora/opg/test/json/stripe_2/creditcard/threeds2requesttoken/case_01/createdelayedpaymentIntent_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);

@@ -69,8 +69,8 @@ public class StripeV2IdealPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test // OperationId: 07c3cf20c7944ee3b95e787a37b4586b
     public void case_01_ThreeDs2PaymentSuccessful() {
-        final String retrievePaymentIntent_response = "/com/zuora/billing/opg/test/json/stripe_2/ideal/payment/case_01/retrievePaymentIntent_response.json";
-        final String updatePaymentIntent_response = "/com/zuora/billing/opg/test/json/stripe_2/ideal/payment/case_01/updatePaymentIntent_response.json";
+        final String retrievePaymentIntent_response = "/com/zuora/opg/test/json/stripe_2/ideal/payment/case_01/retrievePaymentIntent_response.json";
+        final String updatePaymentIntent_response = "/com/zuora/opg/test/json/stripe_2/ideal/payment/case_01/updatePaymentIntent_response.json";
 
         Map<String, String> requestMap = OpgRequestMapHelper.constructPaymentCallRequestMap(payment, paymentGateway, false);
         putThreeDS2RequestMappingFields(requestMap);
@@ -119,8 +119,8 @@ public class StripeV2IdealPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test // OperationId: 07c3cf20c7944ee3b95e787a37b4586b
     public void case_02_ThreeDs2PaymentFail_WhenInvalidReferenceIdIsPassed() {
-        final String retrievePaymentIntent_response = "/com/zuora/billing/opg/test/json/stripe_2/ideal/payment/case_01/retrievePaymentIntent_response.json";
-        final String updatePaymentIntent_response = "/com/zuora/billing/opg/test/json/stripe_2/ideal/payment/case_01/updatePaymentIntent_response.json";
+        final String retrievePaymentIntent_response = "/com/zuora/opg/test/json/stripe_2/ideal/payment/case_01/retrievePaymentIntent_response.json";
+        final String updatePaymentIntent_response = "/com/zuora/opg/test/json/stripe_2/ideal/payment/case_01/updatePaymentIntent_response.json";
 
         Map<String, String> requestMap = OpgRequestMapHelper.constructPaymentCallRequestMap(payment, paymentGateway, false);
         putThreeDS2RequestMappingFields(requestMap);

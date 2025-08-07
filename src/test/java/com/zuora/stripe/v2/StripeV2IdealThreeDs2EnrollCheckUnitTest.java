@@ -50,9 +50,9 @@ public class StripeV2IdealThreeDs2EnrollCheckUnitTest extends OpgJsonBaseTest {
 
     @Test // OperationId: 07c3cf20c7944ee3b95e787a37b4586b
     public void case_01_ThreeDs2EnrollCheckSuccessful_WhenOnSessionPaymentWithStoringPaymentMethod() {
-        final String createCustomer_response = "/com/zuora/billing/opg/test/json/stripe_2/ideal/threeds2enrollcheck/case_01/createCustomer_response.json";
-        final String createPaymentIntent_response = "/com/zuora/billing/opg/test/json/stripe_2/ideal/threeds2enrollcheck/case_01/createPaymentIntent_response.json";
-        final String confirmPaymentIntent_response = "/com/zuora/billing/opg/test/json/stripe_2/ideal/threeds2enrollcheck/case_01/confirmPaymentIntent_response.json";
+        final String createCustomer_response = "/com/zuora/opg/test/json/stripe_2/ideal/threeds2enrollcheck/case_01/createCustomer_response.json";
+        final String createPaymentIntent_response = "/com/zuora/opg/test/json/stripe_2/ideal/threeds2enrollcheck/case_01/createPaymentIntent_response.json";
+        final String confirmPaymentIntent_response = "/com/zuora/opg/test/json/stripe_2/ideal/threeds2enrollcheck/case_01/confirmPaymentIntent_response.json";
 
         Map<String, String> requestMap = OpgRequestMapHelper.constructThreeDS2EnrollCheckCallRequestMap(paymentMethod, paymentGateway);
         putThreeDS2RequestMappingFields(requestMap);
@@ -130,8 +130,8 @@ public class StripeV2IdealThreeDs2EnrollCheckUnitTest extends OpgJsonBaseTest {
 
     @Test // OperationId: 157bfe1c2d22429ea565ac8dcb2d990a
     public void case_02_ThreeDs2EnrollCheckSuccessful_WhenOnSessionPaymentWithoutStoringPaymentMethod() {
-        final String createPaymentIntent_response = "/com/zuora/billing/opg/test/json/stripe_2/ideal/threeds2enrollcheck/case_02/createPaymentIntent_response.json";
-        final String confirmPaymentIntent_response = "/com/zuora/billing/opg/test/json/stripe_2/ideal/threeds2enrollcheck/case_02/confirmPaymentIntent_response.json";
+        final String createPaymentIntent_response = "/com/zuora/opg/test/json/stripe_2/ideal/threeds2enrollcheck/case_02/createPaymentIntent_response.json";
+        final String confirmPaymentIntent_response = "/com/zuora/opg/test/json/stripe_2/ideal/threeds2enrollcheck/case_02/confirmPaymentIntent_response.json";
 
         Map<String, String> requestMap = OpgRequestMapHelper.constructThreeDS2EnrollCheckCallRequestMap(paymentMethod, paymentGateway);
         putThreeDS2RequestMappingFields(requestMap);
@@ -185,9 +185,9 @@ public class StripeV2IdealThreeDs2EnrollCheckUnitTest extends OpgJsonBaseTest {
 
     @Test // OperationId: 000601e2fb1b477fb048e9fe7e7bdd8e
     public void case_03_ThreeDs2EnrollCheckShouldFail_WhenFieldsNotPassed() {
-        final String createCustomer_response = "/com/zuora/billing/opg/test/json/stripe_2/ideal/threeds2enrollcheck/case_03/createCustomer_response.json";
-        final String createPaymentIntent_response = "/com/zuora/billing/opg/test/json/stripe_2/ideal/threeds2enrollcheck/case_03/createPaymentIntent_response.json";
-        final String confirmPaymentIntent_response = "/com/zuora/billing/opg/test/json/stripe_2/ideal/threeds2enrollcheck/case_03/confirmPaymentIntent_response.json";
+        final String createCustomer_response = "/com/zuora/opg/test/json/stripe_2/ideal/threeds2enrollcheck/case_03/createCustomer_response.json";
+        final String createPaymentIntent_response = "/com/zuora/opg/test/json/stripe_2/ideal/threeds2enrollcheck/case_03/createPaymentIntent_response.json";
+        final String confirmPaymentIntent_response = "/com/zuora/opg/test/json/stripe_2/ideal/threeds2enrollcheck/case_03/confirmPaymentIntent_response.json";
 
         Map<String, String> requestMap = OpgRequestMapHelper.constructThreeDS2EnrollCheckCallRequestMap(paymentMethod, paymentGateway);
         putThreeDS2RequestMappingFields(requestMap);

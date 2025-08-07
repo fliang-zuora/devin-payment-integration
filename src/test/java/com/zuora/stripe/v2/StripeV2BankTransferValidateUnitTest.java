@@ -27,8 +27,8 @@ public class StripeV2BankTransferValidateUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_01_ItShouldApproveGoodBankTRansferPaymentMethod() {
-        final String case_01_create_customer_response = "/com/zuora/billing/opg/test/json/stripe_2/bankTransfer/validate/case_01/create_customer_response.json";
-        final String case_01_confirm_setup_intent_response = "/com/zuora/billing/opg/test/json/stripe_2/bankTransfer/validate/case_01/confirm_setup_intent_response.json";
+        final String case_01_create_customer_response = "/com/zuora/opg/test/json/stripe_2/bankTransfer/validate/case_01/create_customer_response.json";
+        final String case_01_confirm_setup_intent_response = "/com/zuora/opg/test/json/stripe_2/bankTransfer/validate/case_01/confirm_setup_intent_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -122,8 +122,8 @@ public class StripeV2BankTransferValidateUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_02_ReturnUnknownZuoraResponseCodeWhenGatewayReturns5XXHttpStatus() {
-        final String case_02_create_customer_response = "/com/zuora/billing/opg/test/json/stripe_2/bankTransfer/validate/case_02/create_customer_response.json";
-        final String case_02_confirm_setup_intent_response = "/com/zuora/billing/opg/test/json/stripe_2/bankTransfer/validate/case_02/confirm_setup_intent_response.json";
+        final String case_02_create_customer_response = "/com/zuora/opg/test/json/stripe_2/bankTransfer/validate/case_02/create_customer_response.json";
+        final String case_02_confirm_setup_intent_response = "/com/zuora/opg/test/json/stripe_2/bankTransfer/validate/case_02/confirm_setup_intent_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -270,8 +270,8 @@ public class StripeV2BankTransferValidateUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_05_ValidateBacsPaymentMethodWithNoTokensProvided() {
-        final String case_05_create_customer_response = "/com/zuora/billing/opg/test/json/stripe_2/bankTransfer/validate/case_05/create_customer_response.json";
-        final String case_05_confirm_setup_intent_response = "/com/zuora/billing/opg/test/json/stripe_2/bankTransfer/validate/case_05/confirm_setup_intent_response.json";
+        final String case_05_create_customer_response = "/com/zuora/opg/test/json/stripe_2/bankTransfer/validate/case_05/create_customer_response.json";
+        final String case_05_confirm_setup_intent_response = "/com/zuora/opg/test/json/stripe_2/bankTransfer/validate/case_05/confirm_setup_intent_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -369,8 +369,8 @@ public class StripeV2BankTransferValidateUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_06_ItShouldApprovePADBankTransferPaymentMethodWithoutSkipVerification() {
-        final String create_customer_response = "/com/zuora/billing/opg/test/json/stripe_2/bankTransfer/validate/case_06/create_customer_response_06.json";
-        final String confirm_setup_intent_response = "/com/zuora/billing/opg/test/json/stripe_2/bankTransfer/validate/case_06/confirm_setup_intent_response_06.json";
+        final String create_customer_response = "/com/zuora/opg/test/json/stripe_2/bankTransfer/validate/case_06/create_customer_response_06.json";
+        final String confirm_setup_intent_response = "/com/zuora/opg/test/json/stripe_2/bankTransfer/validate/case_06/confirm_setup_intent_response_06.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -478,8 +478,8 @@ public class StripeV2BankTransferValidateUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_07_ItShouldApprovePADBankTransferPaymentMethodWithSkipVerification() {
-        final String create_customer_response = "/com/zuora/billing/opg/test/json/stripe_2/bankTransfer/validate/case_07/create_customer_response_07.json";
-        final String confirm_setup_intent_response = "/com/zuora/billing/opg/test/json/stripe_2/bankTransfer/validate/case_07/confirm_setup_intent_response_07.json";
+        final String create_customer_response = "/com/zuora/opg/test/json/stripe_2/bankTransfer/validate/case_07/create_customer_response_07.json";
+        final String confirm_setup_intent_response = "/com/zuora/opg/test/json/stripe_2/bankTransfer/validate/case_07/confirm_setup_intent_response_07.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(HashMapBuilder.<String, String>builder()
                         .put("PaymentGateway.FeatureSettings", "Feature-SkipVerificationMethod-Enabled=true;")

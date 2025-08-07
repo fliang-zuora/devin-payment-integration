@@ -30,7 +30,7 @@ public class StripeV2CreditCardPaymentL3DataUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_01_ItShouldProperlySendL3DataWhenAmountIsBiggerThanMaxInteger() throws Exception {
-        final String case_01_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_01/payment_response.json";
+        final String case_01_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_01/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -170,7 +170,7 @@ public class StripeV2CreditCardPaymentL3DataUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_02_ItShouldProperlySendL3DataWhenAmountIsNegativeAndIsLessThanMinInteger() throws Exception {
-        final String case_02_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_02/payment_response_for_moto.json";
+        final String case_02_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_02/payment_response_for_moto.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);

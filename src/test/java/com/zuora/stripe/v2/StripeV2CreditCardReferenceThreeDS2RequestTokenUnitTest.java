@@ -24,7 +24,7 @@ public class StripeV2CreditCardReferenceThreeDS2RequestTokenUnitTest extends Opg
 
     @Test
     public void case_01_ThreeDs2RequestTokenSuccessful() {
-        final String mockedResponse = "/com/zuora/billing/opg/test/json/stripe_2/creditcardreference/threeds2requesttoken/case_01/createdelayedpaymentIntent_response.json";
+        final String mockedResponse = "/com/zuora/opg/test/json/stripe_2/creditcardreference/threeds2requesttoken/case_01/createdelayedpaymentIntent_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -86,7 +86,7 @@ public class StripeV2CreditCardReferenceThreeDS2RequestTokenUnitTest extends Opg
 
     @Test
     public void case_02_ThreeDs2RequestTokenSuccessful_withGatewayOptions() {
-        final String mockedResponse = "/com/zuora/billing/opg/test/json/stripe_2/creditcardreference/threeds2requesttoken/case_01/createdelayedpaymentIntent_response.json";
+        final String mockedResponse = "/com/zuora/opg/test/json/stripe_2/creditcardreference/threeds2requesttoken/case_01/createdelayedpaymentIntent_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
