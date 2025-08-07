@@ -1,0 +1,45 @@
+{
+  "id": "6853441676996176204954",
+  "status": "AUTHORIZED",
+  "submitTimeUtc": "2024-01-15T10:30:45Z",
+  "clientReferenceInformation": {
+    "code": "test_reference_123"
+  },
+  "processorInformation": {
+    "transactionId": "85336478963214789",
+    "authorizationCode": "888888",
+    "networkTransactionId": "016150703802094",
+    "responseCode": "100",
+    "responseDetails": "The request was processed successfully."
+  },
+  "paymentInformation": {
+    "card": {
+      "type": "001",
+      "suffix": "1111"
+    }
+  },
+  "orderInformation": {
+    "amountDetails": {
+      "totalAmount": "100.00",
+      "currency": "USD",
+      "authorizedAmount": "100.00"
+    }
+  },
+  "pointOfSaleInformation": {
+    "terminalId": "111111"
+  },
+  "_links": {
+    "self": {
+      "href": "/pts/v2/payments/6853441676996176204954",
+      "method": "GET"
+    },
+    "capture": {
+      "href": "/pts/v2/payments/6853441676996176204954/captures",
+      "method": "POST"
+    },
+    "void": {
+      "href": "/pts/v2/payments/6853441676996176204954/voids",
+      "method": "POST"
+    }
+  }
+}
