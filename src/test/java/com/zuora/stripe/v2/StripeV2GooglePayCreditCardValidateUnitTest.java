@@ -28,8 +28,8 @@ public class StripeV2GooglePayCreditCardValidateUnitTest extends OpgJsonBaseTest
 
     @Test
     public void case_01_ItShouldReturnApprovedWhenEveryThingWorksWellForVisa() throws Exception {
-        final String paymentIntentResponse = "/com/zuora/billing/opg/test/json/stripe_2/googlepaycreditcard/validate/case_01/validate_paymentIntentResponse_visa.json";
-        final String voidResponse = "/com/zuora/billing/opg/test/json/stripe_2/googlepaycreditcard/validate/case_01/validate_voidResponse_visa.json";
+        final String paymentIntentResponse = "/com/zuora/opg/test/json/stripe_2/googlepaycreditcard/validate/case_01/validate_paymentIntentResponse_visa.json";
+        final String voidResponse = "/com/zuora/opg/test/json/stripe_2/googlepaycreditcard/validate/case_01/validate_voidResponse_visa.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final PaymentGateway paymentGateway = StripeTestHelper.buildGatewayInstanceForTest();
@@ -131,7 +131,7 @@ public class StripeV2GooglePayCreditCardValidateUnitTest extends OpgJsonBaseTest
 
     @Test
     public void case_02_ItShouldReturnFailedWhenInvalidExpiryYear() throws Exception {
-        final String case_02_paymentIntentResponse = "/com/zuora/billing/opg/test/json/stripe_2/googlepaycreditcard/validate/case_02/CreateAndConfirmPaymentIntent_errorGpay.json";
+        final String case_02_paymentIntentResponse = "/com/zuora/opg/test/json/stripe_2/googlepaycreditcard/validate/case_02/CreateAndConfirmPaymentIntent_errorGpay.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final PaymentGateway paymentGateway = StripeTestHelper.buildGatewayInstanceForTest();
@@ -206,8 +206,8 @@ public class StripeV2GooglePayCreditCardValidateUnitTest extends OpgJsonBaseTest
 
     @Test
     public void case_03_ItShouldReturnApprovedWhenEveryThingWorksWellForMasterCard() throws Exception {
-        final String paymentIntentResponse = "/com/zuora/billing/opg/test/json/stripe_2/googlepaycreditcard/validate/case_03/validate_paymentIntentResponse_masterCard.json";
-        final String voidResponse = "/com/zuora/billing/opg/test/json/stripe_2/googlepaycreditcard/validate/case_03/validate_voidResponse_masterCard.json";
+        final String paymentIntentResponse = "/com/zuora/opg/test/json/stripe_2/googlepaycreditcard/validate/case_03/validate_paymentIntentResponse_masterCard.json";
+        final String voidResponse = "/com/zuora/opg/test/json/stripe_2/googlepaycreditcard/validate/case_03/validate_voidResponse_masterCard.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final PaymentGateway paymentGateway = StripeTestHelper.buildGatewayInstanceForTest();
@@ -309,8 +309,8 @@ public class StripeV2GooglePayCreditCardValidateUnitTest extends OpgJsonBaseTest
 
     @Test
     public void case_04_ItShouldReturnApprovedWhenEveryThingWorksWellForAmex() throws Exception {
-        final String paymentIntentResponse = "/com/zuora/billing/opg/test/json/stripe_2/googlepaycreditcard/validate/case_04/validate_paymentIntentResponse_amex.json";
-        final String voidResponse = "/com/zuora/billing/opg/test/json/stripe_2/googlepaycreditcard/validate/case_04/validate_voidResponse_amex.json";
+        final String paymentIntentResponse = "/com/zuora/opg/test/json/stripe_2/googlepaycreditcard/validate/case_04/validate_paymentIntentResponse_amex.json";
+        final String voidResponse = "/com/zuora/opg/test/json/stripe_2/googlepaycreditcard/validate/case_04/validate_voidResponse_amex.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final PaymentGateway paymentGateway = StripeTestHelper.buildGatewayInstanceForTest();
@@ -412,8 +412,8 @@ public class StripeV2GooglePayCreditCardValidateUnitTest extends OpgJsonBaseTest
 
     @Test
     public void case_05_ItShouldReturnApprovedWhenEveryThingWorksWellForDiscover() throws Exception {
-        final String paymentIntentResponse = "/com/zuora/billing/opg/test/json/stripe_2/googlepaycreditcard/validate/case_05/validate_paymentIntentResponse_discover.json";
-        final String voidResponse = "/com/zuora/billing/opg/test/json/stripe_2/googlepaycreditcard/validate/case_05/validate_voidResponse_discover.json";
+        final String paymentIntentResponse = "/com/zuora/opg/test/json/stripe_2/googlepaycreditcard/validate/case_05/validate_paymentIntentResponse_discover.json";
+        final String voidResponse = "/com/zuora/opg/test/json/stripe_2/googlepaycreditcard/validate/case_05/validate_voidResponse_discover.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final PaymentGateway paymentGateway = StripeTestHelper.buildGatewayInstanceForTest();
@@ -515,8 +515,8 @@ public class StripeV2GooglePayCreditCardValidateUnitTest extends OpgJsonBaseTest
 
     @Test
     public void case_06_ItShouldReturnApprovedWhenEveryThingWorksWellForJCB() throws Exception {
-        final String paymentIntentResponse = "/com/zuora/billing/opg/test/json/stripe_2/googlepaycreditcard/validate/case_06/validate_paymentIntentResponse_jcb.json";
-        final String voidResponse = "/com/zuora/billing/opg/test/json/stripe_2/googlepaycreditcard/validate/case_06/validate_voidResponse_jcb.json";
+        final String paymentIntentResponse = "/com/zuora/opg/test/json/stripe_2/googlepaycreditcard/validate/case_06/validate_paymentIntentResponse_jcb.json";
+        final String voidResponse = "/com/zuora/opg/test/json/stripe_2/googlepaycreditcard/validate/case_06/validate_voidResponse_jcb.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final PaymentGateway paymentGateway = StripeTestHelper.buildGatewayInstanceForTest();
@@ -618,7 +618,7 @@ public class StripeV2GooglePayCreditCardValidateUnitTest extends OpgJsonBaseTest
 
     @Test
     public void case_07_ItShouldReturnApprovedAndFollowNormalCreditCardFlow() throws Exception {
-        final String validate_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/validate/case_01/validate_response.json";
+        final String validate_response = "/com/zuora/opg/test/json/stripe_2/creditcard/validate/case_01/validate_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final PaymentGateway paymentGateway = StripeTestHelper.buildGatewayInstanceForTest();
@@ -697,8 +697,8 @@ public class StripeV2GooglePayCreditCardValidateUnitTest extends OpgJsonBaseTest
 
     @Test
     public void case_08_ItShouldReturnApprovedForVisaWithoutGatewayOptionEcommerceIndicator() throws Exception {
-        final String paymentIntentResponse = "/com/zuora/billing/opg/test/json/stripe_2/googlepaycreditcard/validate/case_01/validate_paymentIntentResponse_visa.json";
-        final String voidResponse = "/com/zuora/billing/opg/test/json/stripe_2/googlepaycreditcard/validate/case_01/validate_voidResponse_visa.json";
+        final String paymentIntentResponse = "/com/zuora/opg/test/json/stripe_2/googlepaycreditcard/validate/case_01/validate_paymentIntentResponse_visa.json";
+        final String voidResponse = "/com/zuora/opg/test/json/stripe_2/googlepaycreditcard/validate/case_01/validate_voidResponse_visa.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final PaymentGateway paymentGateway = StripeTestHelper.buildGatewayInstanceForTest();
@@ -800,8 +800,8 @@ public class StripeV2GooglePayCreditCardValidateUnitTest extends OpgJsonBaseTest
 
     @Test
     public void case_09_ItShouldReturnApprovedWhenEveryThingWorksWellWithPaymentDescription() throws Exception {
-        final String paymentIntentResponse = "/com/zuora/billing/opg/test/json/stripe_2/googlepaycreditcard/validate/case_09/validate_paymentIntentResponse_visa.json";
-        final String voidResponse = "/com/zuora/billing/opg/test/json/stripe_2/googlepaycreditcard/validate/case_09/validate_voidResponse_visa.json";
+        final String paymentIntentResponse = "/com/zuora/opg/test/json/stripe_2/googlepaycreditcard/validate/case_09/validate_paymentIntentResponse_visa.json";
+        final String voidResponse = "/com/zuora/opg/test/json/stripe_2/googlepaycreditcard/validate/case_09/validate_voidResponse_visa.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final PaymentGateway paymentGateway = StripeTestHelper.buildGatewayInstanceForTest();

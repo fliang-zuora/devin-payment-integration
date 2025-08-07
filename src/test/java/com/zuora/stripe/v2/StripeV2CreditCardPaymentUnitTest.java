@@ -38,7 +38,7 @@ public class StripeV2CreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_01_ItShouldSucceedForNormalRecurringPayment() throws Exception {
-        final String case_01_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_01/payment_response.json";
+        final String case_01_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_01/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -130,7 +130,7 @@ public class StripeV2CreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_02_ItShouldSucceedForMotoPayment() throws Exception {
-        final String case_02_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_02/payment_response_for_moto.json";
+        final String case_02_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_02/payment_response_for_moto.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -227,8 +227,8 @@ public class StripeV2CreditCardPaymentUnitTest extends OpgJsonBaseTest {
      */
     @Test
     public void case_03_ItShouldSucceed_WithCreateAndConfirmPaymentIntentWithoutL3TransactionFlow() throws Exception {
-        final String case_03_createAndConfirmPaymentIntent_error_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_03/payment_create&confirmpaymentintent_l3param_error_response.json";
-        final String case_03_createAndConfirmPaymentIntentWithoutL3_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_03/payment_create&confirmpaymentintent_without_l3_response.json";
+        final String case_03_createAndConfirmPaymentIntent_error_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_03/payment_create&confirmpaymentintent_l3param_error_response.json";
+        final String case_03_createAndConfirmPaymentIntentWithoutL3_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_03/payment_create&confirmpaymentintent_without_l3_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -390,7 +390,7 @@ public class StripeV2CreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_04_ItShouldSucceedForNormalRecurringPaymentwithMITfields() throws Exception {
-        final String case_04_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_04/payment_response_case4.json";
+        final String case_04_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_04/payment_response_case4.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -483,7 +483,7 @@ public class StripeV2CreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_05_ItShouldSucceedForNormalRecurringPayment_WhenStripeRadarSkipRulesParamIsPassed() throws Exception {
-        final String case_05_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_05/payment_response.json";
+        final String case_05_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_05/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -582,7 +582,7 @@ public class StripeV2CreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_06_ItShouldSucceed_WithCreateAndConfirmPaymentIntentWithL3AndAccountNumberTrimmedWithInvoiceListCountLessThan200() throws Exception {
-        final String case_06_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_06/payment_response.json";
+        final String case_06_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_06/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -690,7 +690,7 @@ public class StripeV2CreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_07_ItShouldSucceed_WithCreateAndConfirmPaymentIntentWithL3AndAccountNumberTrimmedWithInvoiceListCountMoreThan200() throws Exception {
-        final String case_07_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_07/payment_response.json";
+        final String case_07_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_07/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -802,7 +802,7 @@ public class StripeV2CreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_08_NormalRecurringPaymentReturnUnknownZuoraResponseCodeWhenGatewayReturns5XXHttpStatus() throws Exception {
-        final String case_08_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_08/payment_response.json";
+        final String case_08_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_08/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -892,8 +892,8 @@ public class StripeV2CreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_09_CreateAndConfirmPaymentIntentWithoutL3ReturnUnknownZuoraResponseCodeWhenGatewayReturns5XXHttpStatus() throws Exception {
-        final String case_09_createAndConfirmPaymentIntent_error_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_09/l3param_error_response.json";
-        final String case_09_createAndConfirmPaymentIntentWithoutL3_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_09/paymentintent_without_l3_response.json";
+        final String case_09_createAndConfirmPaymentIntent_error_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_09/l3param_error_response.json";
+        final String case_09_createAndConfirmPaymentIntentWithoutL3_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_09/paymentintent_without_l3_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -1053,7 +1053,7 @@ public class StripeV2CreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_10_NormalRecurringPaymentReturnFailedZuoraResponseCodeWhenGatewayReturns5XXHttpStatusWithErroCodeLengthGreaterThan3() throws Exception {
-        final String case_10_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_10/payment_response.json";
+        final String case_10_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_10/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -1143,7 +1143,7 @@ public class StripeV2CreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_11_ItShouldSendMandateIdInRequestIfTheCondtionsAreSatisfiedAndSettingIsNotEnabled() throws Exception {
-        final String case_10_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_10/payment_response.json";
+        final String case_10_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_10/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -1229,7 +1229,7 @@ public class StripeV2CreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_12_ItShouldNotSendMandateIdInRequestIfTheCondtionsAreSatisfiedAndSettingIsEnabled() throws Exception {
-        final String case_10_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_10/payment_response.json";
+        final String case_10_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_10/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(HashMapBuilder.<String, String>builder()
                         .put("PaymentGateway.FeatureSettings", "Feature-IgnoreMandateIdInPaymentRunAboveINR15K-Enabled=true;")
@@ -1317,7 +1317,7 @@ public class StripeV2CreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_13_ItShouldSucceedWithDescriptionInRequestWhenDescriptionIsSetInGatewayConfiguration() throws Exception {
-        final String case_13_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_13/payment_response.json";
+        final String case_13_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_13/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -1413,7 +1413,7 @@ public class StripeV2CreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_14_ItShouldSucceedWithDescriptionNotInRequestWhenDescriptionIsBlankInGatewayConfiguration() throws Exception {
-        final String case_14_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_14/payment_response.json";
+        final String case_14_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_14/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -1508,7 +1508,7 @@ public class StripeV2CreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_15_ItShouldSucceedWithDescriptionNotInRequestWhenDescriptionIsSpecialCharactersInGatewayConfiguration() throws Exception {
-        final String case_15_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_15/payment_response.json";
+        final String case_15_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_15/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(HashMapBuilder.<String, String>builder()
                         .put("PaymentGateway.FeatureSettings", "Feature-ShouldUpdateMetadataField-Enabled=true;Feature-CustomInvoiceField-Value=test_pokemon;")
@@ -1609,7 +1609,7 @@ public class StripeV2CreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_16_ItShouldFailWithDescriptionInRequestWhenDescriptionIsSetInGatewayConfigurationAndLengthGreaterThan1000() throws Exception {
-        final String case_16_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_16/payment_response.json";
+        final String case_16_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_16/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -1717,8 +1717,8 @@ public class StripeV2CreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_17_ItShouldSucceed_WithCreateAndConfirmPaymentIntentWithoutL3TransactionFlowWithPaymentDescription() throws Exception {
-        final String case_17_createAndConfirmPaymentIntent_error_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_17/payment_create&confirmpaymentintent_l3param_error_response.json";
-        final String case_17_createAndConfirmPaymentIntentWithoutL3_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_17/payment_create&confirmpaymentintent_without_l3_response.json";
+        final String case_17_createAndConfirmPaymentIntent_error_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_17/payment_create&confirmpaymentintent_l3param_error_response.json";
+        final String case_17_createAndConfirmPaymentIntentWithoutL3_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_17/payment_create&confirmpaymentintent_without_l3_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(HashMapBuilder.<String, String>builder()
                         .put("PaymentGateway.FeatureSettings", "Feature-ShouldUpdateMetadataField-Enabled=true;")
@@ -1885,7 +1885,7 @@ public class StripeV2CreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_18_ItShouldSendSoftDescriptor() throws Exception {
-        final String approved_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/payment/case_01/payment_response.json";
+        final String approved_response = "/com/zuora/opg/test/json/stripe_2/creditcard/payment/case_01/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final PaymentGateway paymentGateway = StripeTestHelper.buildGatewayInstanceForTest();

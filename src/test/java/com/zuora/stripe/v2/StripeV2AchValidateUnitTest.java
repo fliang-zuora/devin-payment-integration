@@ -26,8 +26,8 @@ public class StripeV2AchValidateUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_01_ItShouldApproveGoodAchPaymentMethod() {
-        final String case_01_get_create_or_update_account_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/validate/case_01/create_or_update_account_response.json";
-        final String case_01_create_source_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/validate/case_01/create_source_response.json";
+        final String case_01_get_create_or_update_account_response = "/com/zuora/opg/test/json/stripe_2/ach/validate/case_01/create_or_update_account_response.json";
+        final String case_01_create_source_response = "/com/zuora/opg/test/json/stripe_2/ach/validate/case_01/create_source_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -131,8 +131,8 @@ public class StripeV2AchValidateUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_02_ReturnUnknownZuoraResponseCodeWhenGatewayReturns5XXHttpStatus() {
-        final String case_02_get_create_or_update_account_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/validate/case_02/create_or_update_account_response.json";
-        final String case_02_create_source_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/validate/case_02/create_source_response.json";
+        final String case_02_get_create_or_update_account_response = "/com/zuora/opg/test/json/stripe_2/ach/validate/case_02/create_or_update_account_response.json";
+        final String case_02_create_source_response = "/com/zuora/opg/test/json/stripe_2/ach/validate/case_02/create_source_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -234,8 +234,8 @@ public class StripeV2AchValidateUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_03_ItShouldApproveGoodAchPaymentMethodOfSourceTypeWhenWrongTokensIdFormat() {
-        final String case_03_get_create_or_update_account_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/validate/case_03/create_or_update_account_response.json";
-        final String case_03_create_source_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/validate/case_03/create_source_response.json";
+        final String case_03_get_create_or_update_account_response = "/com/zuora/opg/test/json/stripe_2/ach/validate/case_03/create_or_update_account_response.json";
+        final String case_03_create_source_response = "/com/zuora/opg/test/json/stripe_2/ach/validate/case_03/create_source_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -339,9 +339,9 @@ public class StripeV2AchValidateUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_04_ItShouldApproveGoodAchPaymentMethodOfSourceTypeWhenWrongSecondTokensIdFormat() {
-        final String case_04_get_customer_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/validate/case_04/get_customer_response.json";
-        final String case_04_get_create_or_update_account_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/validate/case_04/create_or_update_account_response.json";
-        final String case_04_create_source_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/validate/case_04/create_source_response.json";
+        final String case_04_get_customer_response = "/com/zuora/opg/test/json/stripe_2/ach/validate/case_04/get_customer_response.json";
+        final String case_04_get_create_or_update_account_response = "/com/zuora/opg/test/json/stripe_2/ach/validate/case_04/create_or_update_account_response.json";
+        final String case_04_create_source_response = "/com/zuora/opg/test/json/stripe_2/ach/validate/case_04/create_source_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -469,7 +469,7 @@ public class StripeV2AchValidateUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_05_ValidTokenFormatWithInvalidCustomerIdThrowErrorAndFeatureEnabled() {
-        final String case_05_get_customer_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/validate/case_05/get_customer_response.json";
+        final String case_05_get_customer_response = "/com/zuora/opg/test/json/stripe_2/ach/validate/case_05/get_customer_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(HashMapBuilder.<String, String>builder()
                         .put("PaymentGateway.FeatureSettings", "Feature-ACHTokenizationSupport-Enabled=true;")
@@ -522,7 +522,7 @@ public class StripeV2AchValidateUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_06_ValidTokenFormatWithDeletedCustomerIdThrowErrorAndFeatureEnabled() {
-        final String case_06_get_customer_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/validate/case_06/get_customer_response.json";
+        final String case_06_get_customer_response = "/com/zuora/opg/test/json/stripe_2/ach/validate/case_06/get_customer_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(HashMapBuilder.<String, String>builder()
                         .put("PaymentGateway.FeatureSettings", "Feature-ACHTokenizationSupport-Enabled=true;")
@@ -575,8 +575,8 @@ public class StripeV2AchValidateUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_07_ValidTokenFormatWithValidCustomerIdAndInvalidPMIdThrowErrorAndFeatureEnabled() {
-        final String case_07_get_customer_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/validate/case_07/get_customer_response.json";
-        final String case_07_get_pm_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/validate/case_07/get_pm_response.json";
+        final String case_07_get_customer_response = "/com/zuora/opg/test/json/stripe_2/ach/validate/case_07/get_customer_response.json";
+        final String case_07_get_pm_response = "/com/zuora/opg/test/json/stripe_2/ach/validate/case_07/get_pm_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(HashMapBuilder.<String, String>builder()
                         .put("PaymentGateway.FeatureSettings", "Feature-ACHTokenizationSupport-Enabled=true;")
@@ -653,8 +653,8 @@ public class StripeV2AchValidateUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_08_ValidTokenFormatWithValidCustomerIdAndInvalidPMTypeThrowErrorAndFeatureEnabled() {
-        final String case_08_get_customer_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/validate/case_08/get_customer_response.json";
-        final String case_08_get_pm_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/validate/case_08/get_pm_response.json";
+        final String case_08_get_customer_response = "/com/zuora/opg/test/json/stripe_2/ach/validate/case_08/get_customer_response.json";
+        final String case_08_get_pm_response = "/com/zuora/opg/test/json/stripe_2/ach/validate/case_08/get_pm_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(HashMapBuilder.<String, String>builder()
                         .put("PaymentGateway.FeatureSettings", "Feature-ACHTokenizationSupport-Enabled=true;")
@@ -732,8 +732,8 @@ public class StripeV2AchValidateUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_09_ValidTokenFormatWithValidTokensShouldApproveGoodAchPMAndFeatureEnabled() {
-        final String case_09_get_customer_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/validate/case_09/get_customer_response.json";
-        final String case_09_get_pm_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/validate/case_09/get_pm_response.json";
+        final String case_09_get_customer_response = "/com/zuora/opg/test/json/stripe_2/ach/validate/case_09/get_customer_response.json";
+        final String case_09_get_pm_response = "/com/zuora/opg/test/json/stripe_2/ach/validate/case_09/get_pm_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(HashMapBuilder.<String, String>builder()
                         .put("PaymentGateway.FeatureSettings", "Feature-ACHTokenizationSupport-Enabled=true;")

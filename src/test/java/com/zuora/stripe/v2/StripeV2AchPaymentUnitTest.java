@@ -32,9 +32,9 @@ public class StripeV2AchPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_01_ItShouldSucceedForNormalPayment_withoutIP() {
-        final String case_01_get_customer_status_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/payment/case_01/get_customer_status_response.json";
-        final String case_01_get_bank_account_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/payment/case_01/get_bank_account_response.json";
-        final String case_01_payment_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/payment/case_01/payment_response.json";
+        final String case_01_get_customer_status_response = "/com/zuora/opg/test/json/stripe_2/ach/payment/case_01/get_customer_status_response.json";
+        final String case_01_get_bank_account_response = "/com/zuora/opg/test/json/stripe_2/ach/payment/case_01/get_bank_account_response.json";
+        final String case_01_payment_response = "/com/zuora/opg/test/json/stripe_2/ach/payment/case_01/payment_response.json";
         final String tokenId = "ba_1MAcjnHo3zohLKRe4Quaahlk"; // default_source in the get_customer_status_response.json
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
@@ -165,9 +165,9 @@ public class StripeV2AchPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_02_ReturnUnknownZuoraResponseCodeWhenGatewayReturns5XXHttpStatus() {
-        final String case_02_get_customer_status_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/payment/case_02/get_customer_status_response.json";
-        final String case_02_get_bank_account_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/payment/case_02/get_bank_account_response.json";
-        final String case_02_payment_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/payment/case_02/payment_response.json";
+        final String case_02_get_customer_status_response = "/com/zuora/opg/test/json/stripe_2/ach/payment/case_02/get_customer_status_response.json";
+        final String case_02_get_bank_account_response = "/com/zuora/opg/test/json/stripe_2/ach/payment/case_02/get_bank_account_response.json";
+        final String case_02_payment_response = "/com/zuora/opg/test/json/stripe_2/ach/payment/case_02/payment_response.json";
         final String tokenId = "ba_1MAcjnHo3zohLKRe4Quaahlk"; // default_source in the get_customer_status_response.json
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
@@ -299,9 +299,9 @@ public class StripeV2AchPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_03_ItShouldSucceedForNormalPaymentWhenOldTokensFormat() {
-        final String case_03_get_customer_status_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/payment/case_03/get_customer_status_response.json";
-        final String case_03_get_bank_account_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/payment/case_03/get_bank_account_response.json";
-        final String case_03_payment_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/payment/case_03/payment_response.json";
+        final String case_03_get_customer_status_response = "/com/zuora/opg/test/json/stripe_2/ach/payment/case_03/get_customer_status_response.json";
+        final String case_03_get_bank_account_response = "/com/zuora/opg/test/json/stripe_2/ach/payment/case_03/get_bank_account_response.json";
+        final String case_03_payment_response = "/com/zuora/opg/test/json/stripe_2/ach/payment/case_03/payment_response.json";
         final String tokenId = "ba_1MAcjnHo3zohLKRe4Quaahlk"; // default_source in the get_customer_status_response.json
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
@@ -432,7 +432,7 @@ public class StripeV2AchPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_04_ItShouldSucceedForNormalPaymentWhenNewTokensFormatAndFeatureEnabled() {
-        final String case_04_payment_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/payment/case_04/payment_response.json";
+        final String case_04_payment_response = "/com/zuora/opg/test/json/stripe_2/ach/payment/case_04/payment_response.json";
         final String tokenId = "pm_1Ovbiv4ZWiZesCzmKYzBYktN";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(HashMapBuilder.<String, String>builder()
@@ -511,9 +511,9 @@ public class StripeV2AchPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_05_ItShouldSendSoftDescriptorInPaymentIntent() {
-        final String get_customer_status_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/payment/case_01/get_customer_status_response.json";
-        final String get_bank_account_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/payment/case_01/get_bank_account_response.json";
-        final String payment_response = "/com/zuora/billing/opg/test/json/stripe_2/ach/payment/case_01/payment_response.json";
+        final String get_customer_status_response = "/com/zuora/opg/test/json/stripe_2/ach/payment/case_01/get_customer_status_response.json";
+        final String get_bank_account_response = "/com/zuora/opg/test/json/stripe_2/ach/payment/case_01/get_bank_account_response.json";
+        final String payment_response = "/com/zuora/opg/test/json/stripe_2/ach/payment/case_01/payment_response.json";
         final String tokenId = "ba_1MAcjnHo3zohLKRe4Quaahlk"; // default_source in the get_customer_status_response.json
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false, StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final PaymentGateway paymentGateway = StripeTestHelper.buildGatewayInstanceForTest();

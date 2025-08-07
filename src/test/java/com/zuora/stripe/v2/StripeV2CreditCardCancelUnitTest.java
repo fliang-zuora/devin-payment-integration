@@ -33,7 +33,7 @@ public class StripeV2CreditCardCancelUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_01_ItShouldPassPaymentIntentIdStoredInReferenceIdInDBAndSecondReferenceIdisNull() throws Exception {
-        final String case_01_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/cancel/case_01/payment_cancel_response.json";
+        final String case_01_response = "/com/zuora/opg/test/json/stripe_2/creditcard/cancel/case_01/payment_cancel_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final PaymentGateway paymentGateway = StripeTestHelper.buildGatewayInstanceForTest();
@@ -97,7 +97,7 @@ public class StripeV2CreditCardCancelUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_02_ItShouldPassPaymentIntentIdStoredInSecondReferenceIdInDB() throws Exception {
-        final String case_01_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/cancel/case_01/payment_cancel_response.json";
+        final String case_01_response = "/com/zuora/opg/test/json/stripe_2/creditcard/cancel/case_01/payment_cancel_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final PaymentGateway paymentGateway = StripeTestHelper.buildGatewayInstanceForTest();
@@ -233,7 +233,7 @@ public class StripeV2CreditCardCancelUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_04_ReturnUnknownZuoraResponseCodeWhenGatewayReturns5XXHttpStatus() throws Exception {
-        final String case_04_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/cancel/case_04/payment_cancel_response.json";
+        final String case_04_response = "/com/zuora/opg/test/json/stripe_2/creditcard/cancel/case_04/payment_cancel_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final PaymentGateway paymentGateway = StripeTestHelper.buildGatewayInstanceForTest();

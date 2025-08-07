@@ -29,8 +29,8 @@ public class StripeV2CreditCardReferenceThreeDS2EnrollCheckUnitTest extends OpgJ
 
     @Test
     public void case_01_ThreeDs2EnrollCheckSuccessful() {
-        final String case_01_createcustomer_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/createcustomer_response.json";
-        final String case_01_threeds2enrollcheck_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/threeds2enrollcheck_response.json";
+        final String case_01_createcustomer_response = "/com/zuora/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/createcustomer_response.json";
+        final String case_01_threeds2enrollcheck_response = "/com/zuora/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/threeds2enrollcheck_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -124,8 +124,8 @@ public class StripeV2CreditCardReferenceThreeDS2EnrollCheckUnitTest extends OpgJ
 
     @Test
     public void case_02_ReturnUnknownZuoraResponseCodeWhenGatewayReturns5XXHttpStatus() {
-        final String case_02_createcustomer_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_02/createcustomer_response.json";
-        final String case_02_threeds2enrollcheck_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_02/threeds2enrollcheck_response.json";
+        final String case_02_createcustomer_response = "/com/zuora/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_02/createcustomer_response.json";
+        final String case_02_threeds2enrollcheck_response = "/com/zuora/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_02/threeds2enrollcheck_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -220,8 +220,8 @@ public class StripeV2CreditCardReferenceThreeDS2EnrollCheckUnitTest extends OpgJ
 
     @Test
     public void case_03_ThreeDs2EnrollCheckSuccessful_withNonINRCurrencyWhenFeatureStripeCustomerAddressEnabledFlagIsTrue() {
-        final String case_01_createcustomer_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/createcustomer_response.json";
-        final String case_01_threeds2enrollcheck_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/threeds2enrollcheck_response.json";
+        final String case_01_createcustomer_response = "/com/zuora/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/createcustomer_response.json";
+        final String case_01_threeds2enrollcheck_response = "/com/zuora/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/threeds2enrollcheck_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(HashMapBuilder.<String, String>builder()
                         .put("PaymentGateway.FeatureSettings", "Feature-StripeCustomerAddress-Enabled=true;")
@@ -295,8 +295,8 @@ public class StripeV2CreditCardReferenceThreeDS2EnrollCheckUnitTest extends OpgJ
 
     @Test
     public void case_04_ThreeDs2EnrollCheckSuccessful_withNonINRCurrency_withBillToInfoWhenFeatureStripeCustomerAddressEnabledFlagIsTrue() {
-        final String case_01_createcustomer_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/createcustomer_response.json";
-        final String case_01_threeds2enrollcheck_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/threeds2enrollcheck_response.json";
+        final String case_01_createcustomer_response = "/com/zuora/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/createcustomer_response.json";
+        final String case_01_threeds2enrollcheck_response = "/com/zuora/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/threeds2enrollcheck_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(HashMapBuilder.<String, String>builder()
                         .put("PaymentGateway.FeatureSettings", "Feature-StripeCustomerAddress-Enabled=true;")
@@ -385,8 +385,8 @@ public class StripeV2CreditCardReferenceThreeDS2EnrollCheckUnitTest extends OpgJ
 
     @Test
     public void case_05_ThreeDs2EnrollCheckSuccessful_withNonINRCurrency_withSoldToInfoWhenFeatureStripeCustomerAddressEnabledFlagIsTrue() {
-        final String case_01_createcustomer_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/createcustomer_response.json";
-        final String case_01_threeds2enrollcheck_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/threeds2enrollcheck_response.json";
+        final String case_01_createcustomer_response = "/com/zuora/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/createcustomer_response.json";
+        final String case_01_threeds2enrollcheck_response = "/com/zuora/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/threeds2enrollcheck_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(HashMapBuilder.<String, String>builder()
                         .put("PaymentGateway.FeatureSettings", "Feature-StripeCustomerAddress-Enabled=true;")
@@ -475,8 +475,8 @@ public class StripeV2CreditCardReferenceThreeDS2EnrollCheckUnitTest extends OpgJ
 
     @Test
     public void case_06_ThreeDs2EnrollCheckSuccessful_withNonINRCurrency_withOutAddressInfoWhenFeatureStripeCustomerAddressEnabledFlagIsFalse() {
-        final String case_01_createcustomer_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/createcustomer_response.json";
-        final String case_01_threeds2enrollcheck_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/threeds2enrollcheck_response.json";
+        final String case_01_createcustomer_response = "/com/zuora/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/createcustomer_response.json";
+        final String case_01_threeds2enrollcheck_response = "/com/zuora/opg/test/json/stripe_2/creditcardreference/threeds2enrollcheck/case_01/threeds2enrollcheck_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(HashMapBuilder.<String, String>builder()
                         .put("PaymentGateway.FeatureSettings", "Feature-StripeCustomerAddress-Enabled=false;")

@@ -32,7 +32,7 @@ public class StripeV2BankTransferPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_01_ItShouldSucceedForNormalPayment() throws Exception {
-        final String case_01_response = "/com/zuora/billing/opg/test/json/stripe_2/bankTransfer/payment/case_01/payment_response.json";
+        final String case_01_response = "/com/zuora/opg/test/json/stripe_2/bankTransfer/payment/case_01/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -109,7 +109,7 @@ public class StripeV2BankTransferPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_02_ReturnUnknownZuoraResponseCodeWhenGatewayReturns5XXHttpStatus() {;
-        final String case_02_payment_response = "/com/zuora/billing/opg/test/json/stripe_2/bankTransfer/payment/case_02/payment_response.json";
+        final String case_02_payment_response = "/com/zuora/opg/test/json/stripe_2/bankTransfer/payment/case_02/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -186,7 +186,7 @@ public class StripeV2BankTransferPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_03_ItShouldSucceedForBacsNormalPaymentWithTokens() throws Exception {
-        final String case_03_response = "/com/zuora/billing/opg/test/json/stripe_2/bankTransfer/payment/case_03/payment_response.json";
+        final String case_03_response = "/com/zuora/opg/test/json/stripe_2/bankTransfer/payment/case_03/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -267,7 +267,7 @@ public class StripeV2BankTransferPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_04_ItShouldSucceedForBacsNormalPaymentWithoutTokens() throws Exception {
-        final String case_04_response = "/com/zuora/billing/opg/test/json/stripe_2/bankTransfer/payment/case_04/payment_response.json";
+        final String case_04_response = "/com/zuora/opg/test/json/stripe_2/bankTransfer/payment/case_04/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -348,7 +348,7 @@ public class StripeV2BankTransferPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_05_ItShouldSendStatementDescriptor() throws Exception {
-        final String approved_response = "/com/zuora/billing/opg/test/json/stripe_2/bankTransfer/payment/case_01/payment_response.json";
+        final String approved_response = "/com/zuora/opg/test/json/stripe_2/bankTransfer/payment/case_01/payment_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final PaymentGateway paymentGateway = StripeTestHelper.buildGatewayInstanceForTest();

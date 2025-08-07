@@ -33,7 +33,7 @@ public class StripeV2ApplePayCreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_01_ItShouldSucceedForApplePayRecurringPaymentForVisa() throws Exception {
-        final String payment_response = "/com/zuora/billing/opg/test/json/stripe_2/applepaycreditcard/payment/case_01/payment_response.json";
+        final String payment_response = "/com/zuora/opg/test/json/stripe_2/applepaycreditcard/payment/case_01/payment_response.json";
         String networkTransactionId = "901151114810210";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
@@ -123,7 +123,7 @@ public class StripeV2ApplePayCreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_02_ItShouldSucceedForApplePayRecurringPaymentWithL3Data() throws Exception {
-        final String payment_response = "/com/zuora/billing/opg/test/json/stripe_2/applepaycreditcard/payment/case_02/payment_response_withL3.json";
+        final String payment_response = "/com/zuora/opg/test/json/stripe_2/applepaycreditcard/payment/case_02/payment_response_withL3.json";
         String networkTransactionId = "901151114810210";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
@@ -219,8 +219,8 @@ public class StripeV2ApplePayCreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_03_ItShouldSucceed_WithCreateAndConfirmPaymentIntentWithoutL3TransactionFlow() throws Exception {
-        final String case_03_createAndConfirmPaymentIntent_error_response = "/com/zuora/billing/opg/test/json/stripe_2/applepaycreditcard/payment/case_03/payment_create&confirmpaymentintent_l3param_error_response.json";
-        final String case_03_createAndConfirmPaymentIntentWithoutL3_response = "/com/zuora/billing/opg/test/json/stripe_2/applepaycreditcard/payment/case_03/payment_create&confirmpaymentintent_without_l3_response.json";
+        final String case_03_createAndConfirmPaymentIntent_error_response = "/com/zuora/opg/test/json/stripe_2/applepaycreditcard/payment/case_03/payment_create&confirmpaymentintent_l3param_error_response.json";
+        final String case_03_createAndConfirmPaymentIntentWithoutL3_response = "/com/zuora/opg/test/json/stripe_2/applepaycreditcard/payment/case_03/payment_create&confirmpaymentintent_without_l3_response.json";
         String networkTransactionId = "901151114810210";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
@@ -370,7 +370,7 @@ public class StripeV2ApplePayCreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_04_ItShouldSucceedForApplePayRecurringPaymentWithoutNTI() throws Exception {
-        final String payment_response = "/com/zuora/billing/opg/test/json/stripe_2/applepaycreditcard/payment/case_04/payment_response_case4.json";
+        final String payment_response = "/com/zuora/opg/test/json/stripe_2/applepaycreditcard/payment/case_04/payment_response_case4.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -454,7 +454,7 @@ public class StripeV2ApplePayCreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_05_ItShouldSucceedForApplePayRecurringPaymentForMasterCard() throws Exception {
-        final String payment_response = "/com/zuora/billing/opg/test/json/stripe_2/applepaycreditcard/payment/case_05/payment_response_mastercard.json";
+        final String payment_response = "/com/zuora/opg/test/json/stripe_2/applepaycreditcard/payment/case_05/payment_response_mastercard.json";
         String networkTransactionId = "MCCIYQ1MK0608";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
@@ -544,7 +544,7 @@ public class StripeV2ApplePayCreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_06_ItShouldSucceedForApplePayRecurringPaymentForAmex() throws Exception {
-        final String payment_response = "/com/zuora/billing/opg/test/json/stripe_2/applepaycreditcard/payment/case_06/payment_response_amex.json";
+        final String payment_response = "/com/zuora/opg/test/json/stripe_2/applepaycreditcard/payment/case_06/payment_response_amex.json";
         String networkTransactionId = "656850841024977";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
@@ -633,7 +633,7 @@ public class StripeV2ApplePayCreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_07_ItShouldSucceedForApplePayRecurringPaymentForDiscover() throws Exception {
-        final String payment_response = "/com/zuora/billing/opg/test/json/stripe_2/applepaycreditcard/payment/case_07/payment_response_discover.json";
+        final String payment_response = "/com/zuora/opg/test/json/stripe_2/applepaycreditcard/payment/case_07/payment_response_discover.json";
         String networkTransactionId = "577254731141131";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
@@ -723,7 +723,7 @@ public class StripeV2ApplePayCreditCardPaymentUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_08_ItShouldSucceedForApplePayRecurringPaymentForJCB() throws Exception {
-        final String payment_response = "/com/zuora/billing/opg/test/json/stripe_2/applepaycreditcard/payment/case_08/payment_response_jcb.json";
+        final String payment_response = "/com/zuora/opg/test/json/stripe_2/applepaycreditcard/payment/case_08/payment_response_jcb.json";
         String networkTransactionId = "507780868675715";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));

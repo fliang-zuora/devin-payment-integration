@@ -29,7 +29,7 @@ public class StripeV2CreditCardAuthorizeUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_01_AuthorizeSuccess() {
-        final String case_01_authorize_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/authorize/case_01/authorize_response.json";
+        final String case_01_authorize_response = "/com/zuora/opg/test/json/stripe_2/creditcard/authorize/case_01/authorize_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -108,7 +108,7 @@ public class StripeV2CreditCardAuthorizeUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_02_ReturnUnknownZuoraResponseCodeWhenGatewayReturns5XXHttpStatus() {
-        final String case_02_authorize_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/authorize/case_02/authorize_response.json";
+        final String case_02_authorize_response = "/com/zuora/opg/test/json/stripe_2/creditcard/authorize/case_02/authorize_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -188,7 +188,7 @@ public class StripeV2CreditCardAuthorizeUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_03_AuthorizeStatus_requires_action() {
-        final String case_03_authorize_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/authorize/case_03/authorize_response.json";
+        final String case_03_authorize_response = "/com/zuora/opg/test/json/stripe_2/creditcard/authorize/case_03/authorize_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -270,7 +270,7 @@ public class StripeV2CreditCardAuthorizeUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_04_AuthorizeStatus_requires_capture() {
-        final String case_04_authorize_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/authorize/case_04/authorize_response.json";
+        final String case_04_authorize_response = "/com/zuora/opg/test/json/stripe_2/creditcard/authorize/case_04/authorize_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -350,7 +350,7 @@ public class StripeV2CreditCardAuthorizeUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_05_ItShouldSucceed_withPaymentDescription() {
-        final String case_05_authorize_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/authorize/case_05/authorize_response.json";
+        final String case_05_authorize_response = "/com/zuora/opg/test/json/stripe_2/creditcard/authorize/case_05/authorize_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final String idempotencyKey = zUtility.getUUID(64);
@@ -433,7 +433,7 @@ public class StripeV2CreditCardAuthorizeUnitTest extends OpgJsonBaseTest {
 
     @Test
     public void case_06_ItShouldSendSoftDescriptor() {
-        final String case_01_authorize_response = "/com/zuora/billing/opg/test/json/stripe_2/creditcard/authorize/case_01/authorize_response.json";
+        final String case_01_authorize_response = "/com/zuora/opg/test/json/stripe_2/creditcard/authorize/case_01/authorize_response.json";
         final OpenPaymentGateway opg = buildOpenPaymentGatewayForTest(false,
                 StripeTestHelper.buildPaymentGatewaySettingRepositoryForTest(null));
         final PaymentGateway paymentGateway = StripeTestHelper.buildGatewayInstanceForTest();
