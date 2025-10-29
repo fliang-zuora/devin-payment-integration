@@ -1,0 +1,26 @@
+payment:
+  validation:
+    # Maximum items for synchronous payment processing
+    max_sync_items: 15000
+    # Maximum items for asynchronous payment processing (hard limit)
+    max_async_items: 50000
+    
+  allocation:
+    # Batch size for async allocation processing
+    batch_size: 1000
+    
+  scheduler:
+    # Timeout in minutes before marking payment as stuck
+    stuck_payment_timeout_minutes: 15
+    # Interval in minutes for running the stuck payment check
+    check_interval_minutes: 60
+    
+  pagination:
+    # Default page size for paginated endpoints
+    default_page_size: 100
+    # Maximum page size allowed
+    max_page_size: 500
+
+logging:
+  level:
+    com.zuora.aitest.payment: INFO
